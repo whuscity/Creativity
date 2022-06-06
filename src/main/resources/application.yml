@@ -3,16 +3,18 @@ server:
 spring:
   application:
     name: creativity-service
-#  cloud: #nacos地址
-#    nacos:
-#      server-addr: nacos-server:8848
-#      config:
-#        file-extension: yaml
-#    profiles:
-#      active: dev
-
-
-
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.24.233:3306/creativity_web
+    username: cradmin
+    password: CRadmin.888
+  cloud: #nacos地址
+    nacos:
+      server-addr: nacos-server:8848
+      config:
+        file-extension: yaml
+    profiles:
+      active: dev
 
 #拉取的配置文件DataID : creativity-service-dev.yaml
 
