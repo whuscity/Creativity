@@ -1,0 +1,63 @@
+/* 默认样式复用代码 */
+* {
+    margin: 0;
+    padding: 0;
+    /* 内减模式 */
+    box-sizing: border-box;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.clearfix:before, .clearfix:after {
+    content: '';
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+
+/* 共用组件样式代码 */
+body {
+    background-color: #fcfcfc;
+}
+
+.header {
+    background-color: #493f83;
+    height: 72px;
+}
+
+.header h1 {
+    float: left;
+}
+
+.header h1 img {
+    width: 42px;
+    height: 42px;
+    margin: 15px 0 15px 50px;
+}
+
+.header .nav {
+    float: left;
+    margin-left: 52px;
+}
+
+.header .nav li {
+    float: left;
+    margin-right: 30px;
+}
+
+.header .nav li a {
+    height: 72px;
+    line-height: 72px;
+    display: block;
+    font-size: 18px;
+    color: #ffffff;
+}
