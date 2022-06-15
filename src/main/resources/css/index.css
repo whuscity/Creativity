@@ -1,7 +1,7 @@
 .banner {
     background-color: #493f83;
     padding-top: 104px;
-    padding-bottom: 57px;
+    padding-bottom: 45px;
 }
 
 .banner .title {
@@ -42,6 +42,7 @@
     height: 100%;
     border: 0px;
     outline: none;
+    font-size: 20px;
 }
 
 .banner .search input::placeholder {
@@ -57,4 +58,57 @@
     height: 32px;
     background-image: url(../image/search.svg);
     background-size: contain;
+}
+
+.banner .suggest {
+    position: relative;
+    margin: 6px auto;
+    width: 1046px;
+    background-color: pink;
+}
+
+
+.banner .suggest ul{
+    margin-left: 30px;
+}
+
+.banner .suggest ul li a{
+    color: #ffffff;
+    float:left;
+    border-radius:7px;
+    margin: 0 6px 0 0;
+    font-size: 14px;
+}
+
+.content {
+    padding-bottom: 100px;
+}
+
+.content .content-box {
+    margin-top: 40px;
+    padding-top: 24px;
+}
+
+.content .content-box span {
+
+    width: 4px;
+    height: 24px;
+    background-color: #493f83;
+    display: inline-block;
+}
+
+.content .content-box h2 {
+    display: inline-block;
+    margin-bottom: 30px;
+    line-height: 24px;
+    font-size: 24px;
+    color: #493f83;
+    vertical-align: top;
+    letter-spacing: 2px;
+}
+
+.content .content-box p {
+    font-size: 18px;
+    line-height: 26px;
+    margin-bottom: 6px;
 }

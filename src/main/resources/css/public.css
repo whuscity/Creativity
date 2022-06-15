@@ -61,3 +61,76 @@ body {
     font-size: 18px;
     color: #ffffff;
 }
+
+.wrapper {
+    width: 1250px;
+    margin: 0 auto;
+}
+
+.footer {
+    background-color: #493f83;
+    height: 120px;
+}
+
+.footer .sitemap{
+    height: 90px;
+}
+
+.footer .beian {
+    background-color: #1f1943;
+    height: 30px;
+}
+
+.footer .sitemap {
+    padding: 0 240px;
+}
+
+.footer .sitemap h1 {
+    float: left;
+}
+
+.footer .sitemap h1 img {
+    width: 56px;
+    height: 56px;
+    margin: 17px 0;
+}
+
+.footer .sitemap .nav {
+    float: left;
+    margin-left: 150px;
+}
+
+.footer .sitemap .nav li {
+    float: left;
+    margin-right: 85px;
+}
+
+.footer .sitemap .nav li a {
+    height: 90px;
+    line-height: 90px;
+    display: block;
+    font-size: 12px;
+    color: #ffffff;
+}
+
+.footer .sitemap .qrcode {
+    position: relative;
+    margin-left: 65px;
+    float: left;
+    width: 50px;
+}
+
+.footer .sitemap .qrcode img {
+    width: 45px;
+    height: 45px;
+    margin: 15px 0;
+}
+
+.footer .sitemap .qrcode span{
+    position: absolute;
+    bottom: 3px;
+    left: -1px;
+    font-size: 12px;
+    color: #ffffff;
+    width: 100%;
+}
