@@ -1,0 +1,239 @@
+.body {
+    width: 1440px;
+}
+
+.search {
+    background-color: #493f83;
+    height: 106px;
+    padding-left: 50px;
+    padding-top: 30px;
+}
+
+.search .search-box {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 3px;
+    width: 1064px;
+    height: 50px;
+}
+
+.search .search-box input {
+    width: 1000px;
+    height: 100%;
+    margin-left: 30px;
+    border: 0px;
+    outline: none;
+    font-size: 20px;
+}
+
+.search .search-box input::placeholder {
+    font-size: 20px;
+}
+
+.search .search-box span{
+    position: absolute;
+    top: 9px;
+    right: 10px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background-image: url(../image/search.svg);
+    background-size: contain;
+}
+
+
+.body .left{
+    float: left;
+    margin-bottom: 50px;
+}
+
+.body .left .control {
+    width: 1054px;
+    height: 60px;
+    box-shadow: 1px 1px 6px 0 rgba(162, 162, 162, 0.4);
+    box-shadow: ;
+    border: 0px;
+    margin-top: 24px;
+    margin-left: 50px;
+    background-color: #fff;
+}
+
+.body .left .control .reorder {
+    margin-left: 15px;
+    float: left;
+    margin-top: 8px;
+    border: 1px solid #493f83;
+    border-radius: 4px;
+}
+
+.body .left .control .reorder li {
+    float: left;
+    border-left: 1px solid #493f83;
+}
+
+.body .left .control .reorder li:first-child {
+    border-left: 0px;
+}
+
+.body .left .control .reorder input{
+    width: 148px;
+    height: 44px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0);
+    color: #493f83;
+    font-size: 14px;
+    border: 0;
+}
+
+.body .left .control .reorder input.active{
+    background-color: #8979e4;
+    color: #ffffff;
+}
+
+.body .left .control .reorder input:hover{
+    background-color: #8979e4;
+    color: #ffffff;
+}
+
+.body .left .control .info {
+    float: right;
+    font-size: 14px;
+    line-height: 60px;
+}
+
+.body .left .list .result {
+    width: 1053px;
+    margin-top: 15px;
+    margin-left: 50px;
+    background-color: #ffffff;
+}
+
+.body .left .list .result .title {
+    height: 50px;
+    background-color: #f2f2f2;
+    line-height: 50px;
+    font-size: 20px;
+}
+
+.body .left .list .result .title h3{
+    width: 1000px;
+    float: left;
+    padding-left: 15px;
+}
+
+.body .left .list .result .title input{
+    margin: 13px;
+    width: 24px;
+    height: 24px;
+    float: right;
+}
+
+.body .left .list .result .info{
+    position: relative;
+}
+
+.body .left .list .result .info * {
+    font-size: 14px;
+    height: 20px;
+    padding-left: 15px;
+    margin-top: 5px;
+}
+
+.body .left .list .result .info * *{
+    float: left;
+}
+
+.body .left .list .result .info .abstract h4{
+    height: 60px;
+}
+
+.body .left .list .result .info .abstract p{
+    height: 60px;
+    line-height: 20px;
+    width: 945px;
+    margin-left: 14px;
+}
+
+.body .left .list .result .info .pubtime{
+    position: absolute;
+    right: 30px;
+    top: 0px;
+    float: right;
+}
+
+.body .right{
+    float: left;
+    padding-top: 20px;
+}
+
+.body .right .filter {
+    position: relative;
+    background-color: rgba(73, 63, 131, 0.2);
+    width: 233px;
+    height: 200px;
+    margin-top: 20px;
+    margin-left: 47px;
+}
+
+.body .right .filter span{
+    position: absolute;
+    top: 8px;
+    left: 3px;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url(../image/search.svg);
+    background-size: contain;
+}
+
+.body .right .filter h2{
+    margin-left: 38px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    padding-top: 12px;
+}
+
+.body .right .timefilter{
+    height: 150px;
+}
+
+
+.body .right .timefilter .timerange {
+    padding: 20px 18px;
+}
+
+.body .right .timefilter .timerange select {
+    width: 60px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+.body .right .filter ul {
+    margin-top: 15px;
+}
+
+.body .right .filter ul li {
+    border: 1px solid #BBBBBB;
+    background-color: #FFFFFF;
+    height: 30px;
+    width: 195px;
+    margin-left: 12px;
+    display: block;
+}
+
+.body .right .filter ul li *{
+    float: left;
+    display: inline;
+    line-height: 30px;
+    font-size: 12px;
+}
+
+.body .right .filter ul li input {
+    width: 16px;
+    height: 16px;
+    margin-top: 7px;
+    margin-left: 13px;
+    margin-right: 20px;
+}
+
