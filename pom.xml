@@ -42,18 +42,18 @@
         </dependency>
 
         <!--       nacos服务注册-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-            <version>${nacos-discovery.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
+<!--            <version>${nacos-discovery.version}</version>-->
+<!--        </dependency>-->
 
-        <!--      nacos配置文件拉取-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-            <version>${nacos-discovery.version}</version>
-        </dependency>
+<!--        &lt;!&ndash;      nacos配置文件拉取&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
+<!--            <version>${nacos-discovery.version}</version>-->
+<!--        </dependency>-->
 
         <!--       整合mybatis-plus-->
         <dependency>
@@ -106,6 +106,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--        配置文件处理,@ConfigurationProperties-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
     <build>
