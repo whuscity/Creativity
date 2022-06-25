@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.lilab.creativity.mapper.DocumentsVenuesMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentsVenues">
+    <!--@mbg.generated-->
+    <!--@Table documents_venues-->
+    <result column="venue_id" jdbcType="INTEGER" property="venueId" />
+    <result column="document_id" jdbcType="INTEGER" property="documentId" />
+    <result column="venue_volume" jdbcType="VARCHAR" property="venueVolume" />
+    <result column="venue_issue" jdbcType="VARCHAR" property="venueIssue" />
+    <result column="venue_title" jdbcType="VARCHAR" property="venueTitle" />
+    <result column="venue_year" jdbcType="VARCHAR" property="venueYear" />
+    <result column="venue_page" jdbcType="VARCHAR" property="venuePage" />
+    <result column="venue_str" jdbcType="VARCHAR" property="venueStr" />
+    <result column="venue_type" jdbcType="INTEGER" property="venueType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    venue_id, document_id, venue_volume, venue_issue, venue_title, venue_year, venue_page, 
+    venue_str, venue_type
+  </sql>
+</mapper>

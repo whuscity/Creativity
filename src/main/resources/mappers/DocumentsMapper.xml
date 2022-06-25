@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.lilab.creativity.mapper.DocumentsMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.Documents">
+    <!--@mbg.generated-->
+    <!--@Table documents-->
+    <id column="document_id" jdbcType="INTEGER" property="documentId" />
+    <result column="external_id" jdbcType="VARCHAR" property="externalId" />
+    <result column="external_id_type" jdbcType="VARCHAR" property="externalIdType" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="authors_name_str" jdbcType="VARCHAR" property="authorsNameStr" />
+    <result column="document_type" jdbcType="VARCHAR" property="documentType" />
+    <result column="venue_str" jdbcType="VARCHAR" property="venueStr" />
+    <result column="abstract_short" jdbcType="VARCHAR" property="abstractShort" />
+    <result column="keywords_str" jdbcType="VARCHAR" property="keywordsStr" />
+    <result column="cite_count" jdbcType="VARCHAR" property="citeCount" />
+    <result column="doi" jdbcType="VARCHAR" property="doi" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    document_id, external_id, external_id_type, title, authors_name_str, document_type, 
+    venue_str, abstract_short, keywords_str, cite_count, doi
+  </sql>
+</mapper>

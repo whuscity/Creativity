@@ -19,7 +19,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
-
         <nacos-discovery.version>2.2.0.RELEASE</nacos-discovery.version>
         <mybatis-plus-boot-stater.version>3.3.2</mybatis-plus-boot-stater.version>
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
@@ -119,6 +118,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.2.5.RELEASE</version>
                 <configuration>
                     <excludes>
                         <exclude>
