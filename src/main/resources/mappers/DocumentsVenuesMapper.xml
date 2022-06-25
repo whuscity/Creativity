@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentsVenues">
     <!--@mbg.generated-->
     <!--@Table documents_venues-->
+    <id column="document_id" jdbcType="INTEGER" property="documentId" />
     <result column="venue_id" jdbcType="INTEGER" property="venueId" />
-    <result column="document_id" jdbcType="INTEGER" property="documentId" />
     <result column="venue_volume" jdbcType="VARCHAR" property="venueVolume" />
     <result column="venue_issue" jdbcType="VARCHAR" property="venueIssue" />
     <result column="venue_title" jdbcType="VARCHAR" property="venueTitle" />
@@ -16,7 +16,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    venue_id, document_id, venue_volume, venue_issue, venue_title, venue_year, venue_page, 
+    document_id, venue_id, venue_volume, venue_issue, venue_title, venue_year, venue_page, 
     venue_str, venue_type
   </sql>
 </mapper>

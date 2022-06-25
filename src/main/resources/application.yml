@@ -5,7 +5,7 @@ spring:
     name: creativity-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.24.233:3306/creativity_web
+    url: jdbc:mysql://192.168.24.233:3306/creativity_web?characterEncoding=utf8
     username: cradmin
     password: CRadmin.888
 
