@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### PDmaner ###
+.back_db_config_creativity
+.version_db_config_creativity
