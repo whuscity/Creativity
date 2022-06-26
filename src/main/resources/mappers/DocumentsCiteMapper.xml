@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.lilab.creativity.mapper.DocumentsCiteMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentsCite">
+    <!--@mbg.generated-->
+    <!--@Table documents_cite-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cited_document_id" jdbcType="INTEGER" property="citedDocumentId" />
+    <result column="citing_document_id" jdbcType="INTEGER" property="citingDocumentId" />
+    <result column="cited_document_year" jdbcType="INTEGER" property="citedDocumentYear" />
+    <result column="citing_document_year" jdbcType="INTEGER" property="citingDocumentYear" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, cited_document_id, citing_document_id, cited_document_year, citing_document_year
+  </sql>
+</mapper>
