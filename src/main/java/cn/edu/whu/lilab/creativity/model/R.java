@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 
 @Data
-@ApiModel(value = "公共的返回对象")
+@ApiModel(description = "公共返回对象")
 public class R<T>  {
 
     private static final int SUCCESS  = Constants.SUCCESS;
