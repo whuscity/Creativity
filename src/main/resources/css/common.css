@@ -38,6 +38,11 @@ body {
     float: left;
 }
 
+.header h1 a {
+    float: left;
+    height: 72px;
+}
+
 .header h1 img {
     width: 42px;
     height: 42px;
