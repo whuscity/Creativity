@@ -6,7 +6,7 @@ spring:
 #    name: creativity-service #用于nacos拉取配置文件
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.24.233:3306/creativity_web?characterEncoding=utf8
+    url: jdbc:mysql://192.168.24.233:3306/creativity_web?characterEncoding=utf8&useSSL=false
     username: cradmin
     password: CRadmin.888
 

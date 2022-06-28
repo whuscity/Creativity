@@ -7,7 +7,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.whu.lilab.creativity.mapper.DocumentsMapper;
 import cn.edu.whu.lilab.creativity.domain.Documents;
 import cn.edu.whu.lilab.creativity.service.DocumentsService;
+
 @Service
-public class DocumentsServiceImpl extends ServiceImpl<DocumentsMapper, Documents> implements DocumentsService{
+public class DocumentsServiceImpl extends ServiceImpl<DocumentsMapper, Documents> implements DocumentsService {
 
 }
+
+
