@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.whu.lilab.creativity.mapper.DocumentKeywordsMapper;
 import cn.edu.whu.lilab.creativity.domain.DocumentKeywords;
 import cn.edu.whu.lilab.creativity.service.DocumentKeywordsService;
+
 @Service
-public class DocumentKeywordsServiceImpl extends ServiceImpl<DocumentKeywordsMapper, DocumentKeywords> implements DocumentKeywordsService{
+public class DocumentKeywordsServiceImpl extends ServiceImpl<DocumentKeywordsMapper, DocumentKeywords> implements DocumentKeywordsService {
 
 }
+

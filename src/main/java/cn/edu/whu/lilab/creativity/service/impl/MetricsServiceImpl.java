@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import cn.edu.whu.lilab.creativity.domain.Metrics;
 import cn.edu.whu.lilab.creativity.mapper.MetricsMapper;
 import cn.edu.whu.lilab.creativity.service.MetricsService;
+
 @Service
-public class MetricsServiceImpl extends ServiceImpl<MetricsMapper, Metrics> implements MetricsService{
+public class MetricsServiceImpl extends ServiceImpl<MetricsMapper, Metrics> implements MetricsService {
 
 }
+

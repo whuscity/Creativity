@@ -10,29 +10,29 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value="document_abstract")
+@ApiModel(value = "document_abstract")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "document_abstract")
 public class DocumentAbstract {
     @TableId(value = "document_id", type = IdType.INPUT)
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private Integer documentId;
 
     @TableField(value = "abstract_full")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String abstractFull;
 
     @TableField(value = "abstract_background")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String abstractBackground;
 
     @TableField(value = "abstract_method")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String abstractMethod;
 
     @TableField(value = "abstract_conclusion")
-    @ApiModelProperty(value="")
+    @ApiModelProperty(value = "")
     private String abstractConclusion;
 }
