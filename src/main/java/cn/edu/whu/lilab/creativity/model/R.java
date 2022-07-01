@@ -16,11 +16,11 @@ import java.io.Serializable;
 @ApiModel(description = "公共返回对象")
 public class R<T>  {
 
-    private static final int SUCCESS  = Constants.SUCCESS;
-    private static final int Fail  = Constants.FAIL;
+    private static final Integer SUCCESS  = Constants.SUCCESS;
+    private static final Integer Fail  = Constants.FAIL;
 
     @ApiModelProperty(value = "状态码")
-    private int code;
+    private Integer code;
     @ApiModelProperty(value = "附加信息")
     private String message;
     @ApiModelProperty(value = "返回数据")
@@ -48,12 +48,12 @@ public class R<T>  {
     public static <T> R<T> fail(String message){
         return responseResult(null, Fail,message);
     }
-    public static <T> R<T> fail(int code ,String message){
+    public static <T> R<T> fail(Integer code ,String message){
         return responseResult(null,code,message);
     }
 
 
-    private static  <T> R<T>  responseResult(T data, int code , String message){
+    private static  <T> R<T>  responseResult(T data, Integer code , String message){
         R<T> apiResult = new R<>();
         apiResult.setData(data);
         apiResult.setCode(code);

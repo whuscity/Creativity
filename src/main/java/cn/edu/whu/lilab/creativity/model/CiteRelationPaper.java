@@ -1,6 +1,6 @@
 package cn.edu.whu.lilab.creativity.model;
 
-import cn.edu.whu.lilab.creativity.Vo.CiteRelationPaperVo;
+import cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -18,6 +18,6 @@ public class CiteRelationPaper {
     private Long totalPage;
 
     @ApiModelProperty(value = "指定页的VO对象")
-    private Page<CiteRelationPaperVo> citeRelationPaperListVo;
+    private Page<CiteRelationPaperDto> citeRelationPaperListVo;
 
 }

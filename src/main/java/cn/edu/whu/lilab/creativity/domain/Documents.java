@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -96,4 +97,25 @@ public class Documents {
     @TableField(value = "creativity_index")
     @ApiModelProperty(value = "创新性指数")
     private Integer creativityIndex;
+
+    /**
+     * 发表时间
+     */
+    @TableField(value = "publish_date")
+    @ApiModelProperty(value = "发表时间")
+    private Date publishDate;
+
+    /**
+     * 创新词
+     */
+    @TableField(value = "creativity_words_str")
+    @ApiModelProperty(value = "创新词")
+    private String creativityWordsStr;
+
+    /**
+     * 创新三元组
+     */
+    @TableField(value = "triples_str_list")
+    @ApiModelProperty(value = "创新三元组")
+    private String triplesStrList;
 }

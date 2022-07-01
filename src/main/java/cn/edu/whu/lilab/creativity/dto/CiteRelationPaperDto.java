@@ -1,10 +1,8 @@
-package cn.edu.whu.lilab.creativity.Vo;
+package cn.edu.whu.lilab.creativity.dto;
 
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.models.auth.In;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "指定PMID的参考及引证VO对象")
-public class CiteRelationPaperVo {
+public class CiteRelationPaperDto {
 
     @ApiModelProperty(value = "标题")
     private String title;
