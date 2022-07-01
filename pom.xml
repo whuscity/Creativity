@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
+        <version>2.3.2.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -27,6 +27,7 @@
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
         <hutool.version>4.1.2</hutool.version>
         <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+        <elasticsearch.version>7.14.0</elasticsearch.version>
     </properties>
 
     <dependencies>
@@ -126,7 +127,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
     </dependencies>
+
 
 
     <build>
@@ -134,7 +140,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.2.5.RELEASE</version>
                 <configuration>
                     <excludes>
                         <exclude>
@@ -146,5 +151,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>
