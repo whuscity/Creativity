@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "指定PMID的参考及引证VO对象")
+@ApiModel(description = "指定PMID的参考及引证DTO对象")
 public class CiteRelationPaperDto {
 
     @ApiModelProperty(value = "标题")

@@ -26,6 +26,7 @@
         <swagger2.version>2.9.2</swagger2.version>
         <swagger-annotations.version>1.5.20</swagger-annotations.version>
         <hutool.version>4.1.2</hutool.version>
+        <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
     </properties>
 
     <dependencies>
@@ -111,7 +112,22 @@
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!--    MapStruct依赖-->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId>
+            <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${org.mapstruct.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>

@@ -1,11 +1,9 @@
 package cn.edu.whu.lilab.creativity.model;
 
-import cn.edu.whu.lilab.creativity.constant.Constants;
-import io.swagger.annotations.Api;
+import cn.edu.whu.lilab.creativity.constants.Constants;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import java.io.Serializable;
 
 /**
  * 封装公共的返回对象

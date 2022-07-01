@@ -1,4 +1,4 @@
-package cn.edu.whu.lilab.creativity.constant;
+package cn.edu.whu.lilab.creativity.constants;
 
 
 
