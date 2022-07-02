@@ -1,20 +1,42 @@
 server:
   port: 9999
+
 spring:
-  application:
-    name: creativity-service
+#  application:
+#    name: creativity-service #用于nacos拉取配置文件
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.24.233:3306/creativity_web
+    url: jdbc:mysql://192.168.24.233:3306/creativity_web?characterEncoding=utf8&useSSL=false
     username: cradmin
     password: CRadmin.888
-  cloud: #nacos地址
-    nacos:
-      server-addr: nacos-server:8848
-      config:
-        file-extension: yaml
-    profiles:
-      active: dev
+
+mybatis-plus:
+  configuration:
+#    将执行的sql打印出来
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    配置扫描xml路径
+  mapper-locations: classpath:/mappers/*Mapper.xml
+
+swagger2:
+  basePackage: cn.edu.whu.lilab.creativity.controller
+  name: panyiru
+  url: https://github.com/pyr1009/Creativity
+  email: panyiru8012@163.com
+  title: 科技文献创新分析平台API接口
+  description: 平台API接口展示
+  version: 1.0
+  termsOfServiceUrl: https://github.com/whuscity/Creativity
+
+elasticsearch:
+  host: 192.168.24.233:9200
+
+#  cloud: #nacos地址
+#    nacos:
+#      server-addr: nacos-server:8848
+#      config:
+#        file-extension: yaml
+#    profiles:
+#      active: dev
 
 #拉取的配置文件DataID : creativity-service-dev.yaml
 
