@@ -34,8 +34,11 @@ public class DocumentsCite {
     @ApiModelProperty(value = "施引文献id")
     private Integer citingDocumentId;
 
+    /**
+     * 年份用于排序
+     */
     @TableField(value = "cited_document_year")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "年份用于排序")
     private Integer citedDocumentYear;
 
     @TableField(value = "citing_document_year")

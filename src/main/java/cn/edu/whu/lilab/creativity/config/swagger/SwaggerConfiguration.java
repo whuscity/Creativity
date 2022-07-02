@@ -15,6 +15,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
+@EnableConfigurationProperties(SwaggerProperties.class)
 @EnableSwagger2
 public class SwaggerConfiguration {
 
@@ -23,6 +24,7 @@ public class SwaggerConfiguration {
 
     /**
      * swagger2核心配置 docket，主要是添加要扫描controller的路径
+     *
      * @return
      */
     @Bean
@@ -37,6 +39,7 @@ public class SwaggerConfiguration {
 
     /**
      * api 信息的简介
+     *
      * @return
      */
     private ApiInfo apiInfo() {

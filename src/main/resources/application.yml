@@ -27,6 +27,9 @@ swagger2:
   version: 1.0
   termsOfServiceUrl: https://github.com/whuscity/Creativity
 
+elasticsearch:
+  host: 192.168.24.233:9200
+
 #  cloud: #nacos地址
 #    nacos:
 #      server-addr: nacos-server:8848

@@ -16,10 +16,14 @@
     <result column="cite_count" jdbcType="INTEGER" property="citeCount" />
     <result column="doi" jdbcType="VARCHAR" property="doi" />
     <result column="creativity_index" jdbcType="INTEGER" property="creativityIndex" />
+    <result column="publish_date" jdbcType="TIMESTAMP" property="publishDate" />
+    <result column="creativity_words_str" jdbcType="VARCHAR" property="creativityWordsStr" />
+    <result column="triples_str_list" jdbcType="VARCHAR" property="triplesStrList" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     document_id, external_id, external_id_type, title, authors_name_str, document_type, 
-    venue_str, abstract_short, keywords_str, cite_count, doi, creativity_index
+    venue_str, abstract_short, keywords_str, cite_count, doi, creativity_index, publish_date, 
+    creativity_words_str, triples_str_list
   </sql>
 </mapper>

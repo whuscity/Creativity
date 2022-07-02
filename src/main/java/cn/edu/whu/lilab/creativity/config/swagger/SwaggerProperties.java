@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 
 @Data
-@Component // 等价 @EnableConfigurationProperties(SwaggerProperties.class)
 @ConfigurationProperties(prefix = "swagger2")  //读写分离
 public class SwaggerProperties {
 
