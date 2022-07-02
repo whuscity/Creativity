@@ -1,0 +1,242 @@
+.body {
+    width: 1440px;
+    background-color: #f9f9f9;
+}
+
+.article-info {
+    float: left;
+    width: 100%;
+}
+
+.metainfo {
+    float: left;
+    width: 1000px;
+    background-color: #ffffff;
+    margin-top: 40px;
+    margin-left: 50px;
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    
+    padding-left: 15px;
+    padding-top: 10px;
+}
+
+.metainfo .basic h2 {
+    margin-bottom: 10px;
+    font-size: 28px;
+    line-height: 40px;
+}
+
+.metainfo .docinfo span {
+    font-size: 12px;
+    line-height: 14px;
+    margin-right: 20px;
+}
+
+.metainfo .venueinfo span{
+    font-size: 12px;
+    line-height: 14px;
+    margin-right: 20px;
+}
+
+.metainfo .authorinfo {
+    margin-top: 10px;
+}
+
+.metainfo .authorinfo span{
+    font-size: 14px;
+    line-height: 30px;
+}
+
+.metainfo .abstract{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.metainfo .abstract h3{
+    display: inline;
+    float: left;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.metainfo .abstract>div{
+    float: left;
+    display: inline;
+    width: 900px;
+    font-size: 18px;
+    line-height: 24px;
+    display: none;
+}
+
+.metainfo .abstract>div.active{
+    display: inline-block;
+}
+
+.structured_abstract .structure_part .fold{
+    height: 40px;
+    line-height: 40px;
+    width: 950px;
+    background-color: #fafafa;
+    position: relative;
+    box-shadow: 0.5px 0.5px 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.structured_abstract .structure_part .fold .angle{
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    background-image: url(../image/angle.svg);
+    background-size: contain;
+    transform: rotate(-90deg)
+}
+
+.structured_abstract .structure_part .fold h4 {
+    position: absolute;
+    left: 40px;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.structured_abstract .structure_part .content{
+    padding: 20px 40px;
+    font-size: 14px;
+    line-height: 24px;
+    display: none;
+}
+
+
+
+.structured_abstract .structure_part.active .fold .angle{
+    transform: rotate(0deg)
+}
+
+.structured_abstract .structure_part.active .content{
+    display: inline-block;
+}
+
+.metainfo .keywords {
+    margin-top: 40px;
+}
+
+.metainfo .keywords>div {
+    margin-bottom: 25px;
+}
+
+.metainfo .keywords>div h3 {
+    font-size: 20px;
+    line-height: 32px;
+    color: #493f83;
+}
+
+.metainfo .keywords>div span {
+    font-size: 14px;
+    line-height: 30px;
+    margin-right: 75px;
+}
+
+.figure {
+    float: left;
+    margin-top: 40px;
+    margin-left: 10px;
+}
+
+.figure>div {
+    width: 330px;
+    margin-bottom: 20px;
+    border: solid 1px #7F74C1;
+}
+
+.figure>div .fig-title {
+    background-color: #7F74C1;
+    color: #ffffff;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+}
+
+.figure>div .fig-title h3{
+    font-weight: 400;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.figure>div .container {
+    width: 100%;
+    height: 300px;
+    display: inline-block;
+}
+
+.ref {
+    margin-left: 50px;
+    margin-top: 25px;
+}
+
+.ref .head {
+    position: relative;
+    margin-top: 20px;
+}
+
+.ref .head h3 {
+    font-size: 18px;
+    color: #493F83;
+    line-height: 64px;
+}
+
+.ref .head ul {
+    position: absolute;
+    right: 200px;
+    top: 14px;
+    border: 1px solid #493f83;
+    border-radius: 4px;
+}
+
+.ref .head ul li {
+    float: left;
+    border-left: 1px solid #493f83;
+}
+
+.ref .head ul li:first-child {
+    border-left: 0px;
+}
+
+.ref .head ul li input{
+    width: 90px;
+    height: 32px;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0);
+    color: #493f83;
+    font-size: 14px;
+    border: 0;
+}
+
+.ref .head ul li input.active{
+    background-color: #8979e4;
+    color: #ffffff;
+}
+
+.ref .head ul li input:hover{
+    background-color: #8979e4;
+    color: #ffffff;
+}
+
+.ref .list table {
+    width: 1200px;
+    border-collapse:collapse;
+}
+
+.ref .list table tr:nth-child(2n+1){
+    background-color: #f2f2f2;
+}
+
+.ref .list table tr td {
+    border: solid 1px #dbdbdb;
+    height: 40px;
+    font-size: 14px;
+    line-height: 20px;
+    padding: 0 4px;
+    text-align: center;
+}
+
+.ref .list table tr td:nth-child(2) {
+    text-align: left;
+}
