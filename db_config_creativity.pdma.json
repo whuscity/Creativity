@@ -4,12 +4,12 @@
   "avatar": "",
   "version": "4.1.1",
   "createdTime": "2022-6-26 15:16:59",
-  "updatedTime": "2022-6-26 15:22:58",
+  "updatedTime": "2022-7-2 22:17:56",
   "dbConns": [],
   "profile": {
     "default": {
       "db": "29D1CE08-4C35-4D2D-AAA9-23D93305B52E",
-      "dbConn": "CB6E5301-F6B4-4AA7-ADA2-64F8A9A25778",
+      "dbConn": "",
       "entityInitFields": [],
       "entityInitProperties": {
         "partitioned by": "(date string)",
@@ -347,7 +347,7 @@
         "hideInGraph": true
       }
     ],
-    "menuWidth": "255.994px"
+    "menuWidth": "243.986px"
   },
   "entities": [
     {
@@ -690,8 +690,59 @@
           "id": "372B6F52-00BB-47CF-9E89-E905D7522021"
         },
         {
-          "defKey": "document_year",
-          "defName": "出版物年",
+          "defKey": "publish_date",
+          "defName": "发表时间",
+          "comment": "",
+          "type": "VARCHAR",
+          "len": 128,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "C873FDAC-401A-406C-8F96-70AAF66BC0DE"
+        },
+        {
+          "defKey": "cite_count",
+          "defName": "被引量",
+          "comment": "",
+          "type": "VARCHAR",
+          "len": 8,
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "DCC396DE-A29A-4B1A-A37D-1752886ACDB6"
+        },
+        {
+          "defKey": "creativity_index",
+          "defName": "创新性指数",
+          "comment": "",
+          "type": "DOUBLE",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "",
+          "id": "5BC89DBE-CFB8-40AB-B493-527D0E7B8347"
+        },
+        {
+          "defKey": "creativity_words_str",
+          "defName": "展示创新词",
           "comment": "",
           "type": "",
           "len": "",
@@ -704,7 +755,24 @@
           "refDict": "",
           "extProps": {},
           "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
-          "id": "C873FDAC-401A-406C-8F96-70AAF66BC0DE"
+          "id": "F8FC09AB-3430-46A3-9EA7-630776CB7A62"
+        },
+        {
+          "defKey": "triples_str_list",
+          "defName": "创新三元组",
+          "comment": "",
+          "type": "",
+          "len": "",
+          "scale": "",
+          "primaryKey": false,
+          "notNull": false,
+          "autoIncrement": false,
+          "defaultValue": "",
+          "hideInGraph": false,
+          "refDict": "",
+          "extProps": {},
+          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "id": "750FCF10-CFDD-4623-9214-A5FF8939ABF3"
         }
       ],
       "correlations": [],
@@ -1444,7 +1512,7 @@
           "defKey": "id",
           "defName": "",
           "comment": "",
-          "type": "",
+          "type": "INT",
           "len": "",
           "scale": "",
           "primaryKey": false,
@@ -1454,14 +1522,14 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "863D96C7-41D6-463D-8D93-051C60E75D76"
         },
         {
           "defKey": "cited_document_id",
           "defName": "被引文档id",
           "comment": "",
-          "type": "",
+          "type": "INT",
           "len": "",
           "scale": "",
           "primaryKey": false,
@@ -1471,14 +1539,14 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "BEE571F0-1018-4061-B311-038E020CBDF7"
         },
         {
           "defKey": "citing_document_id",
           "defName": "施引文档id",
           "comment": "",
-          "type": "",
+          "type": "INT",
           "len": "",
           "scale": "",
           "primaryKey": false,
@@ -1488,7 +1556,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "A0677A8C-EA59-4326-B604-5149C5DBE5CE"
         }
       ],
@@ -2242,7 +2310,7 @@
           "defKey": "document_id",
           "defName": "",
           "comment": "",
-          "type": "",
+          "type": "INT",
           "len": "",
           "scale": "",
           "primaryKey": false,
@@ -2252,15 +2320,15 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "016EE507-CC90-4A21-A29F-908DCD72A056"
         },
         {
           "defKey": "document_cite_count",
           "defName": "引用数",
           "comment": "",
-          "type": "",
-          "len": "",
+          "type": "VARCHAR",
+          "len": 8,
           "scale": "",
           "primaryKey": false,
           "notNull": false,
@@ -2269,14 +2337,14 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "573A9203-A166-4D77-B5F8-1C94C448AB31"
         },
         {
           "defKey": "document_creativity_index",
           "defName": "创新性指数",
           "comment": "",
-          "type": "",
+          "type": "DOUBLE",
           "len": "",
           "scale": "",
           "primaryKey": false,
@@ -2286,7 +2354,7 @@
           "hideInGraph": false,
           "refDict": "",
           "extProps": {},
-          "domain": "9092C4E0-1A54-4859-ABBB-5B62DBC27573",
+          "domain": "",
           "id": "19FC5A7B-D6AD-437E-8938-6E6F938D63DC"
         }
       ],
@@ -3004,18 +3072,5 @@
       "id": "F30202B9-4B5D-4CE7-87CE-B3890C84D3F2"
     }
   ],
-  "dbConn": [
-    {
-      "defKey": "CB6E5301-F6B4-4AA7-ADA2-64F8A9A25778",
-      "defName": "Server2#MySQL",
-      "type": "29D1CE08-4C35-4D2D-AAA9-23D93305B52E",
-      "properties": {
-        "driver_class_name": "com.mysql.cj.jdbc.Driver",
-        "url": "jdbc:mysql://192.168.24.233:3306/creativity_web?characterEncoding=UTF-8&useSSL=false&useUnicode=true&serverTimezone=UTC",
-        "password": "Xinyang123",
-        "username": "root",
-        "customer_driver": ""
-      }
-    }
-  ]
+  "dbConn": []
 }
