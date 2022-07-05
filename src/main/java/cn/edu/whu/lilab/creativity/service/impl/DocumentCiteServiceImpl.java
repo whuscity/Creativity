@@ -1,21 +1,23 @@
 package cn.edu.whu.lilab.creativity.service.impl;
 
+import cn.edu.whu.lilab.creativity.domain.DocumentCite;
 import cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto;
 import cn.edu.whu.lilab.creativity.enums.OrderType;
+import cn.edu.whu.lilab.creativity.mapper.DocumentCiteMapper;
+import cn.edu.whu.lilab.creativity.service.DocumentCiteService;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.edu.whu.lilab.creativity.mapper.DocumentsCiteMapper;
-import cn.edu.whu.lilab.creativity.domain.DocumentsCite;
-import cn.edu.whu.lilab.creativity.service.DocumentsCiteService;
+
 
 @Service
-public class DocumentsCiteServiceImpl extends ServiceImpl<DocumentsCiteMapper, DocumentsCite> implements DocumentsCiteService {
+public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, DocumentCite> implements DocumentCiteService {
 
     @Autowired
-    private DocumentsCiteMapper documentsCiteMapper;
+    private DocumentCiteMapper documentCiteMapper;
 
     /**
      * 分页获取指定PMID的参考文献列表，按指定类型排序
@@ -29,8 +31,8 @@ public class DocumentsCiteServiceImpl extends ServiceImpl<DocumentsCiteMapper, D
     public Page<CiteRelationPaperDto> findRefById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
 
         switch (orderType) {
-            case "year":
-                page.addOrder(OrderItem.desc(OrderType.CITED_YEAR.getValue()));
+            case "publication_date":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
                 break;
             case "cite_count":
                 page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
@@ -39,7 +41,7 @@ public class DocumentsCiteServiceImpl extends ServiceImpl<DocumentsCiteMapper, D
                 page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
         }
 
-        return documentsCiteMapper.getRefListById(page, pmid);
+        return documentCiteMapper.getRefListById(page, pmid);
     }
 
     /**
@@ -53,8 +55,8 @@ public class DocumentsCiteServiceImpl extends ServiceImpl<DocumentsCiteMapper, D
     @Override
     public Page<CiteRelationPaperDto> findCitingById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
         switch (orderType) {
-            case "year":
-                page.addOrder(OrderItem.desc(OrderType.CITING_YEAR.getValue()));
+            case "publication_date":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
                 break;
             case "cite_count":
                 page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
@@ -63,7 +65,7 @@ public class DocumentsCiteServiceImpl extends ServiceImpl<DocumentsCiteMapper, D
                 page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
         }
 
-        return documentsCiteMapper.getCitingListById(page, pmid);
+        return documentCiteMapper.getCitingListById(page, pmid);
     }
 }
 

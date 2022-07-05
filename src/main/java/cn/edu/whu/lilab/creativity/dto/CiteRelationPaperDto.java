@@ -21,8 +21,8 @@ public class CiteRelationPaperDto {
     private Integer citeCount;
 
 
-    @ApiModelProperty(value = "出版年")
-    private Integer year;
+    @ApiModelProperty(value = "出版时间")
+    private Integer publicationDate;
 
     @ApiModelProperty(value = "创新性指数")
     private Integer creativityIndex;

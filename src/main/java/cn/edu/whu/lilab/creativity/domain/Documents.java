@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,98 +19,99 @@ import lombok.NoArgsConstructor;
 @TableName(value = "documents")
 public class Documents {
     /**
-     * // 需加索引
+     * id
      */
     @TableId(value = "document_id", type = IdType.INPUT)
-    @ApiModelProperty(value = "// 需加索引")
+    @ApiModelProperty(value = "id")
     private Integer documentId;
 
     /**
-     * 外部id // 可能非纯数字
+     * 外部 id
      */
     @TableField(value = "external_id")
-    @ApiModelProperty(value = "外部id // 可能非纯数字")
+    @ApiModelProperty(value = "外部 id")
     private String externalId;
 
     /**
-     * 外部id来源，如pmid // 考虑多库
+     * 外部 id 类型
      */
     @TableField(value = "external_id_type")
-    @ApiModelProperty(value = "外部id来源，如pmid // 考虑多库")
+    @ApiModelProperty(value = "外部 id 类型")
     private String externalIdType;
 
+    /**
+     * 文档标题
+     */
     @TableField(value = "title")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "文档标题")
     private String title;
 
     /**
-     * 作者名字符串（所有作者名字拼接）
+     * 展示作者姓名;规则：多个项目时，分号分隔
      */
     @TableField(value = "authors_name_str")
-    @ApiModelProperty(value = "作者名字符串（所有作者名字拼接）")
+    @ApiModelProperty(value = "展示作者姓名;规则：多个项目时，分号分隔")
     private String authorsNameStr;
 
     /**
-     * 文章类型 // 规定好枚举
+     * 文档类型
      */
     @TableField(value = "document_type")
-    @ApiModelProperty(value = "文章类型 // 规定好枚举")
+    @ApiModelProperty(value = "文档类型")
     private String documentType;
 
     /**
-     * 出版物名称（如期刊）
+     * 展示出版物信息
      */
     @TableField(value = "venue_str")
-    @ApiModelProperty(value = "出版物名称（如期刊）")
+    @ApiModelProperty(value = "展示出版物信息")
     private String venueStr;
 
     /**
-     * 短摘要
+     * 展示摘要
      */
     @TableField(value = "abstract_short")
-    @ApiModelProperty(value = "短摘要")
+    @ApiModelProperty(value = "展示摘要")
     private String abstractShort;
 
     /**
-     * 关键词字符串（所有关键词拼接）// 明确分割规则
+     * 展示关键词;规则：多个项目时，分号分隔
      */
     @TableField(value = "keywords_str")
-    @ApiModelProperty(value = "关键词字符串（所有关键词拼接）// 明确分割规则")
+    @ApiModelProperty(value = "展示关键词;规则：多个项目时，分号分隔")
     private String keywordsStr;
 
-    /**
-     * 引用数
-     */
-    @TableField(value = "cite_count")
-    @ApiModelProperty(value = "引用数")
-    private Integer citeCount;
-
-    /**
-     * // 需加索引
-     */
     @TableField(value = "doi")
-    @ApiModelProperty(value = "// 需加索引")
+    @ApiModelProperty(value = "")
     private String doi;
-
-    /**
-     * 创新性指数
-     */
-    @TableField(value = "creativity_index")
-    @ApiModelProperty(value = "创新性指数")
-    private Integer creativityIndex;
 
     /**
      * 发表时间
      */
     @TableField(value = "publish_date")
     @ApiModelProperty(value = "发表时间")
-    private Date publishDate;
+    // @JsonFormat(pattern = "yyyy-MM-dd")
+    private String publishDate;
 
     /**
-     * 创新词
+     * 被引量
+     */
+    @TableField(value = "cite_count")
+    @ApiModelProperty(value = "被引量")
+    private String citeCount;
+
+    /**
+     * 创新性指数
+     */
+    @TableField(value = "creativity_index")
+    @ApiModelProperty(value = "创新性指数")
+    private Double creativityIndex;
+
+    /**
+     * 展示创新词
      */
     @TableField(value = "creativity_words_str")
-    @ApiModelProperty(value = "创新词")
+    @ApiModelProperty(value = "展示创新词")
     private String creativityWordsStr;
 
     /**

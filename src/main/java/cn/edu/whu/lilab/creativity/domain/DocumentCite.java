@@ -10,38 +10,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value = "documents_cite")
+@ApiModel(value = "document_cite")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "documents_cite")
-public class DocumentsCite {
-    @TableId(value = "id", type = IdType.INPUT)
+@TableName(value = "document_cite")
+public class DocumentCite {
+    @TableField(value = "id")
     @ApiModelProperty(value = "")
     private Integer id;
 
     /**
-     * 被引文献id
+     * 被引文档id
      */
     @TableField(value = "cited_document_id")
-    @ApiModelProperty(value = "被引文献id")
+    @ApiModelProperty(value = "被引文档id")
     private Integer citedDocumentId;
 
     /**
-     * 施引文献id
+     * 施引文档id
      */
     @TableField(value = "citing_document_id")
-    @ApiModelProperty(value = "施引文献id")
+    @ApiModelProperty(value = "施引文档id")
     private Integer citingDocumentId;
-
-    /**
-     * 年份用于排序
-     */
-    @TableField(value = "cited_document_year")
-    @ApiModelProperty(value = "年份用于排序")
-    private Integer citedDocumentYear;
-
-    @TableField(value = "citing_document_year")
-    @ApiModelProperty(value = "")
-    private Integer citingDocumentYear;
 }

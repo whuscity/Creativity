@@ -1,6 +1,6 @@
 package cn.edu.whu.lilab.creativity.service.impl;
 
-import cn.edu.whu.lilab.creativity.converter.DocumentConverter;
+import cn.edu.whu.lilab.creativity.converter.DocumentsConverter;
 import cn.edu.whu.lilab.creativity.dto.DocumentInfoDto;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +19,16 @@ public class DocumentsServiceImpl extends ServiceImpl<DocumentsMapper, Documents
     private DocumentsMapper documentsMapper;
 
     @Autowired
-    private DocumentConverter documentConverter;
+    private DocumentsConverter documentsConverter;
 
     @Override
     public DocumentInfoDto findInfoById(String pmid) {
         Documents documents = documentsMapper.selectOne(new LambdaQueryWrapper<Documents>()
                 .eq(Documents::getExternalId, pmid));
 
-        return documentConverter.converDocumentInfoDto(documents);
+        return documentsConverter.converDocumentInfoDto(documents);
 
     }
 }
-
 
 

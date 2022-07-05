@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.lilab.creativity.mapper.DocumentAuthorsMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentAuthors">
+    <!--@mbg.generated-->
+    <!--@Table document_authors-->
+    <id column="document_id" jdbcType="INTEGER" property="documentId" />
+    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="author_display_name" jdbcType="VARCHAR" property="authorDisplayName" />
+    <result column="author_rank" jdbcType="VARCHAR" property="authorRank" />
+    <result column="is_corresponding_author" jdbcType="VARCHAR" property="isCorrespondingAuthor" />
+    <result column="is_first_author" jdbcType="VARCHAR" property="isFirstAuthor" />
+    <result column="author_type" jdbcType="VARCHAR" property="authorType" />
+    <result column="author_last_name" jdbcType="VARCHAR" property="authorLastName" />
+    <result column="author_fore_name" jdbcType="VARCHAR" property="authorForeName" />
+    <result column="author_initials" jdbcType="VARCHAR" property="authorInitials" />
+    <result column="author_affiliation_name" jdbcType="VARCHAR" property="authorAffiliationName" />
+    <result column="author_address" jdbcType="VARCHAR" property="authorAddress" />
+    <result column="author_email" jdbcType="VARCHAR" property="authorEmail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    document_id, author_id, author_display_name, author_rank, is_corresponding_author, 
+    is_first_author, author_type, author_last_name, author_fore_name, author_initials, 
+    author_affiliation_name, author_address, author_email
+  </sql>
+</mapper>

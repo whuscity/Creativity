@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.whu.lilab.creativity.mapper.DocumentCiteMapper">
+  <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentCite">
+    <!--@mbg.generated-->
+    <!--@Table document_cite-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cited_document_id" jdbcType="INTEGER" property="citedDocumentId" />
+    <result column="citing_document_id" jdbcType="INTEGER" property="citingDocumentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, cited_document_id, citing_document_id
+  </sql>
+
+  <select id="getRefListById" resultType="cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto">
+    select d.title,
+    d.creativity_index,
+    d.publish_date,
+    d.cite_count
+    from document_cite as dc
+    left join documents as d on dc.cited_document_id = d.external_id
+    where dc.citing_document_id = #{pmid}
+  </select>
+
+  <select id="getCitingListById" resultType="cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto">
+    select d.title,
+    d.creativity_index,
+    d.publish_date,
+    d.cite_count
+    from document_cite as dc
+    left join documents as d on dc.citing_document_id = d.external_id
+    where dc.cited_document_id = #{pmid}
+  </select>
+</mapper>

@@ -23,15 +23,15 @@ public class DocumentController {
     @Autowired
     public DocumentsService documentsService;
 
-    @ApiOperation(value = "指定pmid获取论文详情信息")
+    @ApiOperation(value = "指定外部id获取论文详情信息")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pmid", value = "PubMed号")
+            @ApiImplicitParam(name = "externalId", value = "目前只有PubMed号")
     })
-    @GetMapping("/info/{pmid}")
-    public R<DocumentInfoDto> findInfoById(@PathVariable("pmid") String pmid) {
-        DocumentInfoDto documentInfoDto = documentsService.findInfoById(pmid);
+    @GetMapping("/info/{externalId}")
+    public R<DocumentInfoDto> findInfoById(@PathVariable("externalId") String externalId) {
+        DocumentInfoDto documentInfoDto = documentsService.findInfoById(externalId);
         if(documentInfoDto == null){
-            return R.fail("输入pmid有误，请检查");
+            return R.fail("输入外部id有误，请检查");
         }
         return R.ok(documentInfoDto);
     }

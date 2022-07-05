@@ -16,23 +16,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "document_abstract")
 public class DocumentAbstract {
+    /**
+     * id
+     */
     @TableId(value = "document_id", type = IdType.INPUT)
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "id")
     private Integer documentId;
 
+    /**
+     * 摘要全文
+     */
     @TableField(value = "abstract_full")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "摘要全文")
     private String abstractFull;
 
+    /**
+     * 背景部分
+     */
     @TableField(value = "abstract_background")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "背景部分")
     private String abstractBackground;
 
+    /**
+     * 方法部分
+     */
     @TableField(value = "abstract_method")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "方法部分")
     private String abstractMethod;
 
+    /**
+     * 结论部分
+     */
     @TableField(value = "abstract_conclusion")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "结论部分")
     private String abstractConclusion;
 }

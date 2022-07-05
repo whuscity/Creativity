@@ -3,11 +3,13 @@ package cn.edu.whu.lilab.creativity.dto;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -18,7 +20,7 @@ import java.util.Date;
 public class DocumentInfoDto {
 
     @ApiModelProperty(value = "外部id // pmid")
-    private String pmid; //需映射
+    private String externalId; //需映射
 
     @ApiModelProperty(value = "标题")
     private String title;
@@ -27,7 +29,7 @@ public class DocumentInfoDto {
     private String doi;
 
     @ApiModelProperty(value = "发表时间")
-    private Date publishDate;
+    private String publishDate;
 
     @ApiModelProperty(value = "作者名字符串（所有作者名字拼接）")
     private String authorsNameStr;
