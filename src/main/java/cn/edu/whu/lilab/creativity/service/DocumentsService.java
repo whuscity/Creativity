@@ -7,12 +7,16 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface DocumentsService extends IService<Documents> {
 
     /**
-     * 基于指定pmid获取论文详情
-     * @param pmid
+     * 基于指定外部id获取论文详情
+     *
+     * @param externalId
      * @return
      */
-    DocumentInfoDto findInfoById(String pmid);
+    DocumentInfoDto findInfoById(String externalId);
 }
+
+
+
 
 
 

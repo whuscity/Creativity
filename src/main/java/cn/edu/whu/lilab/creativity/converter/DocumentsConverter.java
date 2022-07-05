@@ -6,9 +6,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface DocumentConverter {
+public interface DocumentsConverter {
 
 
-    @Mapping(source = "externalId",target = "pmid")
+    // @Mapping(source = "publishDate",target = "publishDate",dateFormat = "yyyy-MM-dd")
     DocumentInfoDto converDocumentInfoDto(Documents documents);
 }

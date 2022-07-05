@@ -10,22 +10,40 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value = "documents_venues")
+@ApiModel(value = "document_venues")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "documents_venues")
-public class DocumentsVenues {
-    @TableId(value = "document_id", type = IdType.INPUT)
+@TableName(value = "document_venues")
+public class DocumentVenues {
+    @TableField(value = "document_id")
     @ApiModelProperty(value = "")
     private Integer documentId;
 
-    /**
-     * 出版物id
-     */
     @TableField(value = "venue_id")
-    @ApiModelProperty(value = "出版物id")
+    @ApiModelProperty(value = "")
     private Integer venueId;
+
+    /**
+     * 出版物展示名
+     */
+    @TableField(value = "venue_display_name")
+    @ApiModelProperty(value = "出版物展示名")
+    private String venueDisplayName;
+
+    /**
+     * 出版物名
+     */
+    @TableField(value = "venue_name")
+    @ApiModelProperty(value = "出版物名")
+    private String venueName;
+
+    /**
+     * 出版物年
+     */
+    @TableField(value = "venue_year")
+    @ApiModelProperty(value = "出版物年")
+    private String venueYear;
 
     /**
      * 出版物卷
@@ -42,28 +60,16 @@ public class DocumentsVenues {
     private String venueIssue;
 
     /**
-     * 出版物标题
+     * 出版物页
      */
-    @TableField(value = "venue_title")
-    @ApiModelProperty(value = "出版物标题")
-    private String venueTitle;
-
-    @TableField(value = "venue_year")
-    @ApiModelProperty(value = "")
-    private String venueYear;
-
     @TableField(value = "venue_page")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "出版物页")
     private String venuePage;
 
-    @TableField(value = "venue_str")
-    @ApiModelProperty(value = "")
-    private String venueStr;
-
     /**
-     * // int mapping 明确
+     * 出版物类型
      */
     @TableField(value = "venue_type")
-    @ApiModelProperty(value = "// int mapping 明确")
-    private Integer venueType;
+    @ApiModelProperty(value = "出版物类型")
+    private String venueType;
 }

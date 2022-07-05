@@ -16,23 +16,38 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "document_keywords")
 public class DocumentKeywords {
-    @TableId(value = "document_id", type = IdType.INPUT)
-    @ApiModelProperty(value = "")
+    /**
+     * 文档 id
+     */
+    @TableField(value = "document_id")
+    @ApiModelProperty(value = "文档 id")
     private Integer documentId;
 
+    /**
+     * 关键词 id
+     */
     @TableField(value = "keyword_id")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "关键词 id")
     private Integer keywordId;
 
+    /**
+     * 关键词
+     */
     @TableField(value = "keyword_str")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "关键词")
     private String keywordStr;
 
+    /**
+     * 关键词类型
+     */
     @TableField(value = "keyword_type")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "关键词类型")
     private String keywordType;
 
+    /**
+     * 附加信息
+     */
     @TableField(value = "keyword_ext_info")
-    @ApiModelProperty(value = "")
+    @ApiModelProperty(value = "附加信息")
     private String keywordExtInfo;
 }
