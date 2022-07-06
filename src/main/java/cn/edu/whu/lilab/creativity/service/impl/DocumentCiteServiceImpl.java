@@ -31,14 +31,14 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     public Page<CiteRelationPaperDto> findRefById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
 
         switch (orderType) {
-            case "publication_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
+            case "year":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":
-                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
                 break;
             default: //默认创新性指数排序
-                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
 
         return documentCiteMapper.getRefListById(page, pmid);
@@ -55,19 +55,20 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     @Override
     public Page<CiteRelationPaperDto> findCitingById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
         switch (orderType) {
-            case "publication_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
+            case "year":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":
-                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
                 break;
             default: //默认创新性指数排序
-                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
 
         return documentCiteMapper.getCitingListById(page, pmid);
     }
 }
+
 
 
 

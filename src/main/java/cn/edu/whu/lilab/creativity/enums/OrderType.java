@@ -20,8 +20,6 @@ public enum OrderType {
     private String code;
     private String desc;
 
-    public String getValue(){
-        return this.code;
-    }
+
 
 }
