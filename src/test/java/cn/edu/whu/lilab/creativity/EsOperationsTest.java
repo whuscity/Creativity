@@ -1,34 +1,54 @@
 package cn.edu.whu.lilab.creativity;
 
-import cn.edu.whu.lilab.creativity.domain.Product;
-import io.swagger.annotations.Authorization;
+
+import org.elasticsearch.action.delete.DeleteRequest;
+import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.client.indices.CreateIndexRequest;
+import org.elasticsearch.client.indices.CreateIndexResponse;
+import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+
+import java.io.IOException;
 
 @SpringBootTest
 public class EsOperationsTest {
 
-
-    private final ElasticsearchOperations elasticsearchOperations;
-
     @Autowired
-    public EsOperationsTest(ElasticsearchOperations elasticsearchOperations) {
-        this.elasticsearchOperations = elasticsearchOperations;
+    private RestHighLevelClient restHighLevelClient;
+
+    @Test
+    public void testIndexAndMapping() throws IOException {
+        //参数 1: 创建索引请求对象  参数 2: 请求配置对象
+        CreateIndexRequest createIndexRequest = new CreateIndexRequest("products");
+        createIndexRequest.mapping("{\n" +
+                "    \"properties\": {\n" +
+                "      \"title\":{\n" +
+                "        \"type\": \"keyword\"\n" +
+                "      },\n" +
+                "      \"price\":{\n" +
+                "        \"type\": \"double\"\n" +
+                "      },\n" +
+                "      \"created_at\":{\n" +
+                "        \"type\": \"date\"\n" +
+                "      },\n" +
+                "      \"description\":{\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\":\"ik_max_word\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  }", XContentType.JSON);//指定映射 参数 1: 指定映射 json 结构  参数 2:指定数据类型
+        CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
+        System.out.println("创建状态: " + createIndexResponse.isAcknowledged());
+        restHighLevelClient.close();//关闭资源
     }
 
-    /**
-     * save 索引一条文档 更新一条 文档
-     *  save 方法当文档id 不存在时添加文档,当文档 id 存在时候更新文档
-     */
     @Test
-    public  void testIndex(){
-        Product product = new Product();
-        product.setId(2);
-        product.setTitle("日本豆");
-        product.setPrice(5.5);
-        product.setDescription("日本豆真好吃,曾经非常爱吃!");
-        elasticsearchOperations.save(product);
+    public void testIndex() throws IOException {
+        DeleteRequest deleteRequest = new DeleteRequest();
+        DeleteResponse deleteResponse = restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
 }

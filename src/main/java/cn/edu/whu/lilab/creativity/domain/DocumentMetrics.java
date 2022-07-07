@@ -10,27 +10,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@ApiModel(value="document_metrics")
+@ApiModel(value = "document_metrics")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "document_metrics")
 public class DocumentMetrics {
-    @TableField(value = "document_id")
-    @ApiModelProperty(value="")
+    @TableId(value = "document_id", type = IdType.INPUT)
+    @ApiModelProperty(value = "")
     private Integer documentId;
 
     /**
      * 引用数
      */
     @TableField(value = "document_cite_count")
-    @ApiModelProperty(value="引用数")
+    @ApiModelProperty(value = "引用数")
     private String documentCiteCount;
 
     /**
      * 创新性指数
      */
     @TableField(value = "document_creativity_index")
-    @ApiModelProperty(value="创新性指数")
+    @ApiModelProperty(value = "创新性指数")
     private Double documentCreativityIndex;
 }

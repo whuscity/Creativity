@@ -32,7 +32,7 @@ public class CiteController {
     })
     public R<Page<CiteRelationPaperDto>> findRefById(@PathVariable String pmid, @ApiIgnore Page<CiteRelationPaperDto> page, String orderType) {
         // 没传入排序类型时，默认创新指数排序
-        if (StringUtils.isEmpty(orderType)) orderType = OrderType.CREATIVITY_INDEX.getValue();
+        if (StringUtils.isEmpty(orderType)) orderType = OrderType.CREATIVITY_INDEX.getCode();
         Page<CiteRelationPaperDto> citeRelationPaperListVo = documentCiteService.findRefById(pmid, page, orderType);
 
         String message = null;
@@ -53,11 +53,11 @@ public class CiteController {
             @ApiImplicitParam(name = "pmid", value = "PubMed号"),
             @ApiImplicitParam(name = "current", value = "当前页",paramType = "query"),
             @ApiImplicitParam(name = "size", value = "每页显示条数",paramType = "query"),
-            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,year,cite_count"),
+            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,publish_date,cite_count"),
     })
     public R<Page<CiteRelationPaperDto>> findCitingById(@PathVariable String pmid, @ApiIgnore Page<CiteRelationPaperDto> page, String orderType) {
         // 没传入排序类型时，默认创新指数排序
-        if (orderType == null) orderType = OrderType.CREATIVITY_INDEX.getValue();
+        if (orderType == null) orderType = OrderType.CREATIVITY_INDEX.getCode();
         Page<CiteRelationPaperDto> citeRelationPaperListVo = documentCiteService.findCitingById(pmid, page, orderType);
 
         String message = null;
