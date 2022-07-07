@@ -1,7 +1,6 @@
 package cn.edu.whu.lilab.creativity;
 
-import cn.edu.whu.lilab.creativity.domain.Product;
-import io.swagger.annotations.Authorization;
+
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -12,7 +11,6 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 
 import java.io.IOException;
 

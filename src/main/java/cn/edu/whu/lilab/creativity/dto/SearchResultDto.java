@@ -12,8 +12,14 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "查询结果DTO对象")
 public class SearchResultDto {
 
+    @ApiModelProperty(value = "文档id")
+    private String documentId;
+
     @ApiModelProperty(value = "外部id // pmid")
     private String externalId;
+
+    @ApiModelProperty(value = "doi号")
+    private String doi;
 
     @ApiModelProperty(value = "标题")
     private String title;
@@ -38,6 +44,8 @@ public class SearchResultDto {
 
     @ApiModelProperty(value = "发表时间")
     private String publishDate;
+
+
 
 
 }
