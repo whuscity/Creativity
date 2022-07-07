@@ -7,10 +7,9 @@ import cn.edu.whu.lilab.creativity.mapper.DocumentCiteMapper;
 import cn.edu.whu.lilab.creativity.service.DocumentCiteService;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
 @Service
@@ -31,7 +30,7 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     public Page<CiteRelationPaperDto> findRefById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
 
         switch (orderType) {
-            case "year":
+            case "publish_date":
                 page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":
@@ -55,7 +54,7 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     @Override
     public Page<CiteRelationPaperDto> findCitingById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
         switch (orderType) {
-            case "year":
+            case "publish_date":
                 page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":

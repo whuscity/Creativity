@@ -154,7 +154,7 @@ public class QueryResult {
         }
         //排序依据
         switch (orderType) {
-            case "publication_date":
+            case "publish_date":
                 sourceBuilder.sort(OrderType.PUBLICATION_DATE.getCode(), SortOrder.DESC)
                         .sort(OrderType.RELEVANCE.getCode(), SortOrder.DESC);
                 break;
