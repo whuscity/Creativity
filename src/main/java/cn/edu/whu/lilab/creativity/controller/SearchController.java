@@ -42,7 +42,7 @@ public class SearchController {
         // 只支持查询前1000条数据
 
         if (page.getCurrent() * page.getSize() > EsConstants.MAX_RESULT_COUNT) {
-            return R.fail(String.format("仅支持查询前%d条数据,建议缩小查询范围", EsConstants.MAX_RESULT_COUNT));
+            return R.fail(String.format("仅支持查询前%d条数据，建议缩小查询范围", EsConstants.MAX_RESULT_COUNT));
         }
 
 
@@ -59,22 +59,26 @@ public class SearchController {
 
         if (doiPattern.matcher(query).matches()) { //doi查询
              queryResult.searchByDoi(query, page,orderType);
-            if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
-                return R.fail("指定Doi号有误，请重新输入");
-            }
+            // if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
+            //     return R.fail("指定Doi号有误，请重新输入");
+            // }
 
         } else if (pmidPattern.matcher(query).matches()) { //pmid查询
             queryResult.searchByPmid(query,page, orderType);
-            if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
-                return R.fail("指定PubMed号有误，请重新输入");
-            }
+            // if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
+            //     return R.fail("指定PubMed号有误，请重新输入");
+            // }
 
         } else { //title查询
             queryResult.searchByTitle(query, page, orderType);
-            if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
-                return R.fail("无相关数据，请检查是否拼写有误");
-            }
+            // if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
+            //     return R.fail("无相关数据，请检查是否拼写有误");
+            // }
 
+        }
+
+        if (CollectionUtils.isEmpty(page.getRecords()) || page.getRecords().size() == 0) {
+            return R.fail("未查询到相关结果");
         }
         return R.ok(page);
 
