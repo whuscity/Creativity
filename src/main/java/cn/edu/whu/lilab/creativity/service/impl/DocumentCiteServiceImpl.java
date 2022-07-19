@@ -7,10 +7,9 @@ import cn.edu.whu.lilab.creativity.mapper.DocumentCiteMapper;
 import cn.edu.whu.lilab.creativity.service.DocumentCiteService;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.ibatis.annotations.Param;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
 
 @Service
@@ -31,14 +30,14 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     public Page<CiteRelationPaperDto> findRefById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
 
         switch (orderType) {
-            case "publication_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
+            case "publish_date":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":
-                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
                 break;
             default: //默认创新性指数排序
-                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
 
         return documentCiteMapper.getRefListById(page, pmid);
@@ -55,19 +54,20 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     @Override
     public Page<CiteRelationPaperDto> findCitingById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
         switch (orderType) {
-            case "publication_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getValue()));
+            case "publish_date":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
                 break;
             case "cite_count":
-                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
                 break;
             default: //默认创新性指数排序
-                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getValue()));
+                page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
 
         return documentCiteMapper.getCitingListById(page, pmid);
     }
 }
+
 
 
 
