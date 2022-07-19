@@ -22,7 +22,6 @@ public class DocumentsServiceImpl extends ServiceImpl<DocumentsMapper, Documents
     private DocumentsConverter documentsConverter;
 
 
-
     @Override
     public DocumentInfoDto findInfoById(String pmid) {
         Documents documents = documentsMapper.selectOne(new LambdaQueryWrapper<Documents>()
@@ -32,8 +31,14 @@ public class DocumentsServiceImpl extends ServiceImpl<DocumentsMapper, Documents
 
     }
 
-
+    @Override
+    public Integer findDocumentIdByExternalId(String externalId) {
+        Documents documents = documentsMapper.selectOne(new LambdaQueryWrapper<Documents>()
+                .eq(Documents::getExternalId, externalId));
+        return documents.getDocumentId();
+    }
 }
+
 
 
 

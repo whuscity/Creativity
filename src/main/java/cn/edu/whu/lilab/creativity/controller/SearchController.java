@@ -45,7 +45,6 @@ public class SearchController {
             return R.fail(String.format("仅支持查询前%d条数据，建议缩小查询范围", EsConstants.MAX_RESULT_COUNT));
         }
 
-
         // 判断查询类型：title、doi、pmid
         //doi: 10.+ 四位数字 + / + 无限制后缀
         Pattern doiPattern = Pattern.compile("^10\\.\\d{4}/.+$");
