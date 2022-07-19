@@ -17,18 +17,18 @@ import lombok.NoArgsConstructor;
 @TableName(value = "document_authors")
 public class DocumentAuthors {
     /**
-     * id
-     */
-    @TableId(value = "document_id", type = IdType.INPUT)
-    @ApiModelProperty(value = "id")
-    private Integer documentId;
-
-    /**
      * 作者id
      */
-    @TableField(value = "author_id")
+    @TableId(value = "author_id", type = IdType.INPUT)
     @ApiModelProperty(value = "作者id")
     private Integer authorId;
+
+    /**
+     * id
+     */
+    @TableField(value = "document_id")
+    @ApiModelProperty(value = "id")
+    private Integer documentId;
 
     /**
      * 展示姓名

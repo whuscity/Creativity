@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentAuthors">
     <!--@mbg.generated-->
     <!--@Table document_authors-->
-    <id column="document_id" jdbcType="INTEGER" property="documentId" />
-    <result column="author_id" jdbcType="INTEGER" property="authorId" />
+    <id column="author_id" jdbcType="INTEGER" property="authorId" />
+    <result column="document_id" jdbcType="INTEGER" property="documentId" />
     <result column="author_display_name" jdbcType="VARCHAR" property="authorDisplayName" />
     <result column="author_rank" jdbcType="VARCHAR" property="authorRank" />
     <result column="is_corresponding_author" jdbcType="VARCHAR" property="isCorrespondingAuthor" />
@@ -20,7 +20,7 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    document_id, author_id, author_display_name, author_rank, is_corresponding_author, 
+    author_id, document_id, author_display_name, author_rank, is_corresponding_author, 
     is_first_author, author_type, author_last_name, author_fore_name, author_initials, 
     author_affiliation_name, author_address, author_email
   </sql>

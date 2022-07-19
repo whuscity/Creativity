@@ -18,14 +18,14 @@ public class CiteRelationPaperDto {
     private String title;
 
     @ApiModelProperty(value = "被引数")
-    private Integer citeCount;
+    private String citeCount;
 
 
     @ApiModelProperty(value = "出版时间")
-    private Integer publicationDate;
+    private String publishDate;
 
     @ApiModelProperty(value = "创新性指数")
-    private Integer creativityIndex;
+    private Double creativityIndex;
 
 
 }

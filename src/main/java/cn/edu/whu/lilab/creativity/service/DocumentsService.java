@@ -14,8 +14,13 @@ public interface DocumentsService extends IService<Documents> {
      */
     DocumentInfoDto findInfoById(String externalId);
 
+    /*
+     *根据外部id获取数据库自增id
+     */
+    Integer findDocumentIdByExternalId(String externalId);
 
 }
+
 
 
 

@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @Api(tags = "摘要API")
 @RestController
 @RequestMapping("/abstract")
@@ -30,7 +28,7 @@ public class AbstractController {
     })
     @GetMapping("/{pmid}")
     public R<DocumentAbstract> findById(@PathVariable String pmid){
-        DocumentAbstract abstractInfo = documentAbstractService.getById(pmid);
+        DocumentAbstract abstractInfo = documentAbstractService.findByExternalId(pmid);
         if(abstractInfo == null){
             return R.fail("指定pmid有误");
         }
