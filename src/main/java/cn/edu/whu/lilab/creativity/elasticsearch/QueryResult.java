@@ -80,8 +80,8 @@ public class QueryResult {
                 "        \"type\": \"integer\"\n" +
                 "      },\n" +
                 "      \"publish_year\": {\n" +
-                "        \"type\": \"date\",\n" +
-                "        \"format\": \"yyyy\"\n" +
+                "        \"type\": \"integer\"\n" +
+                "      \n" +
                 "      },\n" +
                 "      \"document_id\":{\n" +
                 "        \"type\": \"integer\"\n" +
