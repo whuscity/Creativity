@@ -209,13 +209,13 @@ public class QueryResult {
 
         }
 
-        setMaxPages(page, (int) hitTotal);
+        // setMaxPages(page, (int) hitTotal);
          page.setRecords(searchResultDtos).setTotal(hitTotal);
 
     }
 
     /**
-     * 基于设置的最大查询数上限，计算最大页数
+     * 基于设置的最大查询数上限，注意此处无效
      *
      * @param page
      * @param total

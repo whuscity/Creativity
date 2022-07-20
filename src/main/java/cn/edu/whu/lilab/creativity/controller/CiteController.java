@@ -31,7 +31,7 @@ public class CiteController {
             @ApiImplicitParam(name = "pmid", value = "PubMed号"),
             @ApiImplicitParam(name = "current", value = "当前页", paramType = "query"),
             @ApiImplicitParam(name = "size", value = "每页显示条数", paramType = "query"),
-            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,publication_year,cite_count"),
+            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,publish_year,cite_count"),
     })
     public R<Page<CiteRelationPaperDto>> findRefById(@PathVariable String pmid, @ApiIgnore Page<CiteRelationPaperDto> page, String orderType) {
         // 没传入排序类型时，默认创新指数排序
@@ -56,7 +56,7 @@ public class CiteController {
             @ApiImplicitParam(name = "pmid", value = "PubMed号"),
             @ApiImplicitParam(name = "current", value = "当前页", paramType = "query"),
             @ApiImplicitParam(name = "size", value = "每页显示条数", paramType = "query"),
-            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,publish_date,cite_count"),
+            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "creativity_index,publish_year,cite_count"),
     })
     public R<Page<CiteRelationPaperDto>> findCitingById(@PathVariable String pmid, @ApiIgnore Page<CiteRelationPaperDto> page, String orderType) {
         // 没传入排序类型时，默认创新指数排序
