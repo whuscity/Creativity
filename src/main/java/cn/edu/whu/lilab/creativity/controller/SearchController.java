@@ -38,7 +38,7 @@ public class SearchController {
             @ApiImplicitParam(name = "query", value = "查询语句"),
             @ApiImplicitParam(name = "current", value = "当前页，默认1", paramType = "query"),
             @ApiImplicitParam(name = "size", value = "每页显示条数，默认10", paramType = "query"),
-            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "relevance,publish_date,cite_count")
+            @ApiImplicitParam(name = "orderType", value = "排序依据(默认creativity_index)", allowableValues = "relevance,publish_year,cite_count")
     })
     public R<Page<SearchResultDto>> findSearchResult(String query, @ApiIgnore Page<SearchResultDto> page, String orderType) {
         // 只支持查询前1000条数据

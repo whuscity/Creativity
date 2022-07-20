@@ -42,7 +42,8 @@ public class QueryResult {
      */
     private void createIndex() throws IOException {
         CreateIndexRequest createIndexRequest = new CreateIndexRequest("documents_info");
-        createIndexRequest.mapping(" {\n" +
+        createIndexRequest.mapping("{\n" +
+                "    \"properties\": {\n" +
                 "      \"external_id\": {\n" +
                 "        \"type\": \"keyword\"\n" +
                 "      },\n" +
@@ -53,10 +54,12 @@ public class QueryResult {
                 "          \"keyword\":{\n" +
                 "            \"type\":\"keyword\"\n" +
                 "          }\n" +
-                "        }\n" +
+                "        },\n" +
+                "        \"boost\": 2\n" +
                 "      },\n" +
                 "      \"authors_name_str\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
                 "      },\n" +
                 "      \"document_type\": {\n" +
                 "        \"type\": \"keyword\"\n" +
@@ -65,16 +68,20 @@ public class QueryResult {
                 "        \"type\": \"text\"\n" +
                 "      },\n" +
                 "      \"abstract_short\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
                 "      },\n" +
                 "      \"keywords_str\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\",\n" +
+                "        \"boost\": 3\n" +
                 "      },\n" +
                 "      \"cite_count\": {\n" +
                 "        \"type\": \"integer\"\n" +
                 "      },\n" +
-                "      \"publish_date\": {\n" +
-                "        \"type\": \"date\"\n" +
+                "      \"publish_year\": {\n" +
+                "        \"type\": \"date\",\n" +
+                "        \"format\": \"yyyy\"\n" +
                 "      },\n" +
                 "      \"document_id\":{\n" +
                 "        \"type\": \"integer\"\n" +
@@ -82,7 +89,8 @@ public class QueryResult {
                 "      \"doi\":{\n" +
                 "        \"type\":\"keyword\"\n" +
                 "      }\n" +
-                "    }", XContentType.JSON);
+                "    }\n" +
+                "  }", XContentType.JSON);
         CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
         log.info("是否创建索引成功：{}", createIndexResponse.isAcknowledged());
         restHighLevelClient.close(); //关闭资源
@@ -108,7 +116,7 @@ public class QueryResult {
                     .from((int) ((page.getCurrent() - 1) * page.getSize())) //起始位置
                     .size((int) page.getSize());
             if(StringUtils.isEmpty(orderType) || orderType.equals("")){
-                orderType = OrderType.PUBLICATION_DATE.getCode();
+                orderType = OrderType.PUBLICATION_YEAR.getCode();
             }
              getSearchResultDtos(sourceBuilder,page, orderType);
         }
@@ -154,8 +162,8 @@ public class QueryResult {
         }
         //排序依据
         switch (orderType) {
-            case "publish_date":
-                sourceBuilder.sort(OrderType.PUBLICATION_DATE.getCode(), SortOrder.DESC)
+            case "publish_year":
+                sourceBuilder.sort(OrderType.PUBLICATION_YEAR.getCode(), SortOrder.DESC)
                         .sort(OrderType.RELEVANCE.getCode(), SortOrder.DESC);
                 break;
             case "cite_count":
@@ -164,7 +172,7 @@ public class QueryResult {
                 break;
             default: //默认相关度排序
                 sourceBuilder.sort(OrderType.RELEVANCE.getCode(), SortOrder.DESC)
-                        .sort(OrderType.PUBLICATION_DATE.getCode(), SortOrder.DESC);
+                        .sort(OrderType.PUBLICATION_YEAR.getCode(), SortOrder.DESC);
 
         }
 
