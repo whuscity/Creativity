@@ -6,6 +6,7 @@ import cn.edu.whu.lilab.creativity.enums.OrderType;
 import cn.edu.whu.lilab.creativity.enums.SearchType;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.extern.slf4j.Slf4j;
@@ -197,7 +198,8 @@ public class QueryResult {
         for (SearchHit hit : hits) {
             SearchResultDto searchResultDto = null;
             try {
-                searchResultDto = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
+                searchResultDto = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                        .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
                         .readValue(hit.getSourceAsString(), SearchResultDto.class);
                 searchResultDtos.add(searchResultDto);
             } catch (JsonProcessingException e) {
@@ -227,5 +229,6 @@ public class QueryResult {
             page.setPages(pages);
         }
     }
+
 
 }

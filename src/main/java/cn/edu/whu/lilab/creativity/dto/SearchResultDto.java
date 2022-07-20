@@ -1,22 +1,28 @@
 package cn.edu.whu.lilab.creativity.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel(description = "查询结果DTO对象")
-public class SearchResultDto {
+public class SearchResultDto implements Serializable {
 
+    @JsonProperty("document_id")
     @ApiModelProperty(value = "文档id")
     private String documentId;
 
+
     @ApiModelProperty(value = "外部id // pmid")
     private String externalId;
+
 
     @ApiModelProperty(value = "doi号")
     private String doi;
@@ -43,9 +49,7 @@ public class SearchResultDto {
     private String citeCount;
 
     @ApiModelProperty(value = "发表时间")
-    private String publishDate;
-
-
+    private Integer publishYear;
 
 
 }
