@@ -7,12 +7,15 @@ public interface DocumentAbstractService extends IService<DocumentAbstract> {
 
     /**
      * 基于外部ID获取摘要对象
+     *
      * @param externalId
      * @return
      */
     DocumentAbstract findByExternalId(String externalId);
 
 }
+
+
 
 
 

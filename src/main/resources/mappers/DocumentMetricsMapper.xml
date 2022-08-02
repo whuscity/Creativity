@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.edu.whu.lilab.creativity.domain.DocumentMetrics">
     <!--@mbg.generated-->
     <!--@Table document_metrics-->
-    <id column="document_id" jdbcType="INTEGER" property="documentId" />
+    <result column="document_id" jdbcType="INTEGER" property="documentId" />
     <result column="document_cite_count" jdbcType="VARCHAR" property="documentCiteCount" />
     <result column="document_creativity_index" jdbcType="DOUBLE" property="documentCreativityIndex" />
   </resultMap>

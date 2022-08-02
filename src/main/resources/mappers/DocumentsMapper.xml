@@ -15,15 +15,17 @@
     <result column="keywords_str" jdbcType="VARCHAR" property="keywordsStr" />
     <result column="doi" jdbcType="VARCHAR" property="doi" />
     <result column="publish_date" jdbcType="VARCHAR" property="publishDate" />
+    <result column="publish_year" jdbcType="INTEGER" property="publishYear" />
     <result column="cite_count" jdbcType="VARCHAR" property="citeCount" />
     <result column="creativity_index" jdbcType="DOUBLE" property="creativityIndex" />
     <result column="creativity_words_str" jdbcType="VARCHAR" property="creativityWordsStr" />
     <result column="triples_str_list" jdbcType="VARCHAR" property="triplesStrList" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     document_id, external_id, external_id_type, title, authors_name_str, document_type, 
-    venue_str, abstract_short, keywords_str, doi, publish_date, cite_count, creativity_index, 
-    creativity_words_str, triples_str_list
+    venue_str, abstract_short, keywords_str, doi, publish_date, publish_year, cite_count, 
+    creativity_index, creativity_words_str, triples_str_list, data_source
   </sql>
 </mapper>

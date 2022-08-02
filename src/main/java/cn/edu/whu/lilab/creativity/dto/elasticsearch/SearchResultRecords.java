@@ -1,6 +1,5 @@
-package cn.edu.whu.lilab.creativity.dto;
+package cn.edu.whu.lilab.creativity.dto.elasticsearch;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -12,10 +11,9 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "查询结果DTO对象")
-public class SearchResultDto implements Serializable {
+@ApiModel(description = "查询结果记录")
+public class SearchResultRecords implements Serializable {
 
-    @JsonProperty("document_id")
     @ApiModelProperty(value = "文档id")
     private String documentId;
 
@@ -50,6 +48,13 @@ public class SearchResultDto implements Serializable {
 
     @ApiModelProperty(value = "发表时间")
     private Integer publishYear;
+
+    @ApiModelProperty(value = "出版物名")
+    private String venueName;
+
+
+    @ApiModelProperty(value = "所属子领域")
+    private String subfield;
 
 
 }

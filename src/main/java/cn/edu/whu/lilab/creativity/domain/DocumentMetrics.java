@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "document_metrics")
 public class DocumentMetrics {
-    @TableId(value = "document_id", type = IdType.INPUT)
+    @TableField(value = "document_id")
     @ApiModelProperty(value = "")
     private Integer documentId;
 

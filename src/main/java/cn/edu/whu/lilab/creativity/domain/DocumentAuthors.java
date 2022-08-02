@@ -106,4 +106,8 @@ public class DocumentAuthors {
     @TableField(value = "author_email")
     @ApiModelProperty(value = "作者电邮")
     private String authorEmail;
+
+    @TableField(value = "data_source")
+    @ApiModelProperty(value = "")
+    private String dataSource;
 }

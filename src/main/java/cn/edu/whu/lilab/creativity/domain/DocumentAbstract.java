@@ -50,4 +50,8 @@ public class DocumentAbstract {
     @TableField(value = "abstract_conclusion")
     @ApiModelProperty(value = "结论部分")
     private String abstractConclusion;
+
+    @TableField(value = "data_source")
+    @ApiModelProperty(value = "")
+    private String dataSource;
 }

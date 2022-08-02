@@ -9,9 +9,11 @@
     <result column="abstract_background" jdbcType="LONGVARCHAR" property="abstractBackground" />
     <result column="abstract_method" jdbcType="LONGVARCHAR" property="abstractMethod" />
     <result column="abstract_conclusion" jdbcType="LONGVARCHAR" property="abstractConclusion" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    document_id, abstract_full, abstract_background, abstract_method, abstract_conclusion
+    document_id, abstract_full, abstract_background, abstract_method, abstract_conclusion, 
+    data_source
   </sql>
 </mapper>

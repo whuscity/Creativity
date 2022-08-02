@@ -91,6 +91,13 @@ public class Documents {
     private String publishDate;
 
     /**
+     * 发表年份
+     */
+    @TableField(value = "publish_year")
+    @ApiModelProperty(value = "发表年份")
+    private Integer publishYear;
+
+    /**
      * 被引量
      */
     @TableField(value = "cite_count")
@@ -117,4 +124,11 @@ public class Documents {
     @TableField(value = "triples_str_list")
     @ApiModelProperty(value = "创新三元组")
     private String triplesStrList;
+
+    /**
+     * 其他信息
+     */
+    @TableField(value = "data_source")
+    @ApiModelProperty(value = "其他信息")
+    private String dataSource;
 }
