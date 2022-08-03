@@ -29,12 +29,12 @@ public class SearchController {
     private QueryResult queryResult;
 
     @PostMapping("/search")
-    @ApiOperation(value = "基于指定查询语句分页搜索文献列表，按指定类型排序，默认相关度排序")
+    @ApiOperation(value = "基于指定查询语句分页搜索文献列表，按指定类型排序，默认相关度排序", produces = "application/json", consumes = "application/json")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "query", value = "查询语句"),
             @ApiImplicitParam(name = "current", value = "当前页，默认1"),
             @ApiImplicitParam(name = "size", value = "每页显示条数，默认10"),
-            @ApiImplicitParam(name = "orderType", value = "排序依据(默认relevance)", allowableValues = "relevance,publish_year,cite_count"),
+            @ApiImplicitParam(name = "orderType", value = "排序依据(publish_year,cite_count,默认relevance)", allowableValues = "relevance,publish_year,cite_count"),
             @ApiImplicitParam(name = "startPublishYear", value = "起始出版年（包括）"),
             @ApiImplicitParam(name = "endPublishYear", value = "终止出版年（包括）"),
             @ApiImplicitParam(name = "documentType", value = "文档类型list"),
@@ -58,7 +58,7 @@ public class SearchController {
             return R.fail("查询出错，请重试");
         }
         if (searchResult.getHitTotal() == 0) {
-            return R.ok(searchResult,"未查询到相关结果");
+            return R.ok(searchResult, "未查询到相关结果");
         }
         return R.ok(searchResult);
 

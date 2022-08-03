@@ -22,7 +22,7 @@ public class CiteRelationPaperDto {
 
 
     @ApiModelProperty(value = "出版时间")
-    private String publishDate;
+    private String publishYear;
 
     @ApiModelProperty(value = "创新性指数")
     private Double creativityIndex;

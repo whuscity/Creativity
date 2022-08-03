@@ -16,7 +16,7 @@
   <select id="getRefListById" resultType="cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto">
     select d.title,
     d.creativity_index,
-    d.publish_date,
+    d.publish_year,
     d.cite_count
     from document_cite as dc
     join documents as d on dc.cited_document_id = d.document_id
@@ -26,7 +26,7 @@
   <select id="getCitingListById" resultType="cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto">
     select d.title,
     d.creativity_index,
-    d.publish_date,
+    d.publish_year,
     d.cite_count
     from document_cite as dc
      join documents as d on dc.citing_document_id = d.document_id

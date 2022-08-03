@@ -22,7 +22,7 @@ public class SearchQuery {
     @ApiModelProperty(value = "每页显示条数，默认10")
     private Integer size;
 
-    @ApiModelProperty(value = "排序依据(默认relevance)")
+    @ApiModelProperty(value = "排序依据(publish_year,cite_count,默认relevance)")
     private String orderType;
 
     @ApiModelProperty(value = "起始出版年")
