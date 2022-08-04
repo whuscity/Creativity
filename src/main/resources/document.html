@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/document.css">
     <script src="./js/document.js"></script>
-    <script src="./js/public.js"></script>
+    <script src="./js/common.js"></script>
 </head>
 <body>
     <div class="header">
         <h1><a href="#"><img src="./image/logo.png" alt=""></a></h1>
         <div class="nav">
-            <li><a href="#">首页</a></li>
+            <li><a href="/">首页</a></li>
             <li><a href="#">创新贡献</a></li>
             <li><a href="#">创新演化</a></li>
             <li><a href="#">关于我们</a></li>
@@ -24,7 +24,7 @@
         <div class="article-info clearfix">
             <div class="metainfo">
                 <div class="basic">
-                    <h2>Title: Tirzepatide Once Weekly for the Treatment of Obesity</h2>
+                    <h2 id="title">Title: Tirzepatide Once Weekly for the Treatment of Obesity</h2>
                     <div class="docinfo">
                         <span id="doi">DOI: 10.1056/NEJMoa2206038</span>
                         <span id="external_id">PMID:35658024</span>
@@ -39,17 +39,17 @@
                 <div class="abstract clearfix">
                     <h3>摘要：</h3>
                     <div class="word active">
-                        <span>BACKGROUND:
+                        <span id="abstract_short">BACKGROUND:
                             Obesity is a chronic disease that results in substantial global morbidity and mortality. The efficacy and safety of tirzepatide, a novel glucose-dependent insulinotropic polypeptide and glucagon-like peptide-1 receptor agonist, in people with obesity are not known.</span>
-                        <a href="#">查看更多</a>
+                        <a onclick="getAbstractFull()" href="#">查看更多</a>
                     </div>
                     <div class="word">
-                        <span>BACKGROUND
+                        <span id="abstract_full">BACKGROUND
                             Obesity is a chronic disease that results in substantial global morbidity and mortality. The efficacy and safety of tirzepatide, a novel glucose-dependent insulinotropic polypeptide and glucagon-like peptide-1 receptor agonist, in people with obesity are not known.METHODS In this phase 3 double-blind, randomized, controlled trial, we assigned 2539 adults with a body-mass index (BMI; the weight in kilograms divided by the square of the height in meters) of 30 or more, or 27 or more and at least one weight-related complication, excluding diabetes, in a 1:1:1:1 ratio to receive once-weekly, subcutaneous tirzepatide (5 mg, 10 mg, or 15 mg) or placebo for 72 weeks, including a 20-week dose-escalation period. Coprimary end points were the percentage change in weight from baseline and a weight reduction of 5% or more. The treatment-regimen estimand assessed effects regardless of treatment discontinuation in the intention-to-treat population.</span>
-                        <a href="#">收起</a>
+                        <a onclick="hideAbstractFull()" href="#">收起</a>
                     </div>
                 </div>    
-                <div class="structured_abstract">
+                <div class="structured_abstract active">
                     <div class="structure_part active">
                         <div class="fold">
                             <span class="angle"></span><h4>背景</h4>
@@ -78,15 +78,15 @@
                 <div class="keywords">
                     <div class="author_keywords">
                         <div><h3>关键词</h3></div>
-                        <div><span>Keyword</span><span>Keyword</span><span>Keyword</span></div>
+                        <div id="keywords"><span>Keyword</span><span>Keyword</span><span>Keyword</span></div>
                     </div>
                     <div class="creativity_keywords">
                         <div><h3>创新词组</h3></div>
-                        <div><span>C-word</span><span>C-word</span><span>C-word</span></div>
+                        <div id="creativity_keywords"><span>C-word</span><span>C-word</span><span>C-word</span></div>
                     </div>
                     <div class="triple_keywords">
                         <div><h3>创新三元组</h3></div>
-                        <div><span>Subject-&gt;Predictation-&gt;Object</span><span>Subject-&gt;Predictation-&gt;Object</span><span>Subject-&gt;Predictation-&gt;Object</span></div>
+                        <div id="triple_keywords"><span>Subject-&gt;Predictation-&gt;Object</span><span>Subject-&gt;Predictation-&gt;Object</span><span>Subject-&gt;Predictation-&gt;Object</span></div>
                     </div>
                 </div>
                 &nbsp;
@@ -103,18 +103,18 @@
             </div>
         </div>
         <hr>
-        <div class="ref citing">
+        <div class="ref cited">
             <div class="head">
                 <h3>参考文献</h3>
                 <ul>
-                    <li><input class="" type="button" value="创新性指数"></li>
-                    <li><input class="" type="button" value="被引量"></li>
-                    <li><input class="" type="button" value="出版年份"></li>
+                    <li><input id="cited_creativity_index" class="" type="button" value="创新性指数" onclick="reorder_cited('creativity_index')"></li>
+                    <li><input id="cited_cite_count" class="" type="button" value="被引量" onclick="reorder_cited('cite_count')"></li>
+                    <li><input id="cited_publish_year" class="" type="button" value="出版年份" onclick="reorder_cited('publish_year')"></li>
                 </ul>
             </div>
             <div class="list">
-                <table>
-                    <tr>
+                <table id="ref">
+                    <!-- <tr>
                         <td>1</td>
                         <td>Language Models Can See: Plugging Visual Controls in TextGeneration</td>
                         <td>0</td>
@@ -183,22 +183,23 @@
                         <td>0</td>
                         <td>0</td>
                         <td>1970</td>
-                    </tr>
+                    </tr> -->
                 </table>
+                <div class="pagination"><span id="cited_prev_page" href="#" class="disabled" onclick="cited_page(1)">上一页</span><span id="cited_pageInfo">N/N</span><span id="cited_next_page" href="#" onclick="cited_page(1)">下一页</span></div>
             </div>
         </div>
-        <div class="ref cited">
+        <div class="ref citing">
             <div class="head">
                 <h3>引证文献</h3>
                 <ul>
-                    <li><input class="" type="button" value="创新性指数"></li>
-                    <li><input class="" type="button" value="被引量"></li>
-                    <li><input class="" type="button" value="出版年份"></li>
+                    <li><input id="citing_creativity_index" class="" type="button" value="创新性指数" onclick="reorder_citing('creativity_index')"></li>
+                    <li><input id="citing_cite_count" class="" type="button" value="被引量" onclick="reorder_citing('cite_count')"></li>
+                    <li><input id="citing_publish_year" class="" type="button" value="出版年份" onclick="reorder_citing('publish_year')"></li>
                 </ul>
             </div>
             <div class="list">
-                <table>
-                    <tr>
+                <table id="citing">
+                    <!-- <tr>
                         <td>1</td>
                         <td>Language Models Can See: Plugging Visual Controls in TextGeneration</td>
                         <td>0</td>
@@ -267,8 +268,9 @@
                         <td>0</td>
                         <td>0</td>
                         <td>1970</td>
-                    </tr>
+                    </tr> -->
                 </table>
+                <div class="pagination"><span id="citing_prev_page" href="#" class="disabled" onclick="citing_page(1)">上一页</span><span id="citing_pageInfo">N/N</span><span id="citing_next_page" href="#" onclick="citing_page(1)">下一页</span></div>
             </div>
         </div>
     </div>
