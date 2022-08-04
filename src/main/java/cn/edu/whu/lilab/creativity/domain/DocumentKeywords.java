@@ -17,18 +17,18 @@ import lombok.NoArgsConstructor;
 @TableName(value = "document_keywords")
 public class DocumentKeywords {
     /**
+     * 关键词 id
+     */
+    @TableId(value = "keyword_id", type = IdType.INPUT)
+    @ApiModelProperty(value = "关键词 id")
+    private Integer keywordId;
+
+    /**
      * 文档 id
      */
     @TableField(value = "document_id")
     @ApiModelProperty(value = "文档 id")
     private Integer documentId;
-
-    /**
-     * 关键词 id
-     */
-    @TableField(value = "keyword_id")
-    @ApiModelProperty(value = "关键词 id")
-    private Integer keywordId;
 
     /**
      * 关键词

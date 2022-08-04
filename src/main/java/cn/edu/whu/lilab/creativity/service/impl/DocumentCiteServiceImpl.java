@@ -5,6 +5,7 @@ import cn.edu.whu.lilab.creativity.dto.CiteRelationPaperDto;
 import cn.edu.whu.lilab.creativity.enums.OrderType;
 import cn.edu.whu.lilab.creativity.mapper.DocumentCiteMapper;
 import cn.edu.whu.lilab.creativity.service.DocumentCiteService;
+import cn.edu.whu.lilab.creativity.service.DocumentsService;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -17,6 +18,9 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
 
     @Autowired
     private DocumentCiteMapper documentCiteMapper;
+
+    @Autowired
+    private DocumentsService documentsService;
 
     /**
      * 分页获取指定PMID的参考文献列表，按指定类型排序
@@ -40,7 +44,8 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
                 page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
 
-        return documentCiteMapper.getRefListById(page, pmid);
+        Integer documentId = documentsService.findDocumentIdByExternalId(pmid);
+        return documentCiteMapper.getRefListById(page, documentId);
     }
 
     /**
@@ -63,10 +68,11 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
             default: //默认创新性指数排序
                 page.addOrder(OrderItem.desc(OrderType.CREATIVITY_INDEX.getCode()));
         }
-
-        return documentCiteMapper.getCitingListById(page, pmid);
+        Integer documentId = documentsService.findDocumentIdByExternalId(pmid);
+        return documentCiteMapper.getCitingListById(page, documentId);
     }
 }
+
 
 
 

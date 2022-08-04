@@ -16,13 +16,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "document_venues")
 public class DocumentVenues {
+    @TableId(value = "venue_id", type = IdType.INPUT)
+    @ApiModelProperty(value = "")
+    private Integer venueId;
+
     @TableField(value = "document_id")
     @ApiModelProperty(value = "")
     private Integer documentId;
-
-    @TableField(value = "venue_id")
-    @ApiModelProperty(value = "")
-    private Integer venueId;
 
     /**
      * 出版物展示名
