@@ -16,7 +16,7 @@
             <a href="#"><img src="./image/logo.png" alt=""></a>
         </h1>
         <div class="nav">
-            <li><a href="#">首页</a></li>
+            <li><a href="/">首页</a></li>
             <li><a href="#">创新贡献</a></li>
             <li><a href="#">创新演化</a></li>
             <li><a href="#">关于我们</a></li>
@@ -25,7 +25,7 @@
 
     <div class="search">
         <div class="search-box">
-            <input type="text" placeholder="输入标题、POI、PMID 等">
+            <input id="search" type="text" placeholder="输入标题、DOI、PMID 等" onkeypress="search(event)">
             <span></span>
         </div>
     </div>
@@ -34,16 +34,16 @@
         <div class="left">
             <div class="control">
                 <ul class="reorder">
-                    <li><input class="" type="button" value="综合"></li>
-                    <li><input class="" type="button" value="被引量"></li>
-                    <li><input class="" type="button" value="出版年份"></li>
+                    <li><input name="reorder" id="search_relevance" type="button" value="综合" onclick="reorder('relevance')"></li>
+                    <li><input name="reorder" id="search_cite_count" type="button" value="被引量" onclick="reorder('cite_count')"></li>
+                    <li><input name="reorder" id="search_publish_year" type="button" value="出版年份" onclick="reorder('publish_year')"></li>
                 </ul>
-                <div class="info">共查询到 N 条结果，当前显示 1-20 条。</div>
+                <div class="info" id="info">共查询到 N 条结果，当前显示 1-20 条。</div>
             </div>
-            <div class="list">
-                <div class="result">
+            <div class="list" id="list">
+                <!-- <div class="result">
                     <div class="title">
-                        <h3>1.  Language Models Can See: Plugging Visual Controls in TextGeneration</h3>
+                        <h3>1.  Language Models Can See: Plugging Visual Controls in TextGeneration</a></h3>
                         <input type="checkbox">
                     </div>
                     <div class="info">
@@ -232,64 +232,157 @@
                             <span>1970/01/01</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
+            <div class="pagination"><span id="prev_page" href="#" class="disabled" onclick="page(1)">上一页</span><span id="pageInfo">N/N</span><span id="next_page" href="#" onclick="page(1)">下一页</span></div>
         </div>
         <div class="right">
             <div class="filter timefilter">
                 <span></span><h2>时间筛选</h2>
                 <div class="timerange">
-                    <select><!-- 表示下拉菜单整体 -->
-                        <option>2001</option><!-- 下拉菜单每一项 -->
+                    <select id="startPublishYear">
+                        <option selected>1975</option>
+                        <option>1976</option>
+                        <option>1977</option>
+                        <option>1978</option>
+                        <option>1979</option>
+                        <option>1980</option>
+                        <option>1981</option>
+                        <option>1982</option>
+                        <option>1983</option>
+                        <option>1984</option>
+                        <option>1985</option>
+                        <option>1986</option>
+                        <option>1987</option>
+                        <option>1988</option>
+                        <option>1989</option>
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                        <option>1993</option>
+                        <option>1994</option>
+                        <option>1995</option>
+                        <option>1996</option>
+                        <option>1997</option>
+                        <option>1998</option>
+                        <option>1999</option>
+                        <option>2000</option>
+                        <option>2001</option>
                         <option>2002</option>
-                        <option selected>2003</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option>
+                        <option>2008</option>
+                        <option>2009</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
+                        <option>2019</option>
+                        <option>2020</option>
+                        <option>2021</option>
+                        <option>2022</option>
                     </select>
                     --
-                    <select><!-- 表示下拉菜单整体 -->
-                        <option>2018</option><!-- 下拉菜单每一项 -->
+                    <select id="endPublishYear">
+                        <option>1975</option>
+                        <option>1976</option>
+                        <option>1977</option>
+                        <option>1978</option>
+                        <option>1979</option>
+                        <option>1980</option>
+                        <option>1981</option>
+                        <option>1982</option>
+                        <option>1983</option>
+                        <option>1984</option>
+                        <option>1985</option>
+                        <option>1986</option>
+                        <option>1987</option>
+                        <option>1988</option>
+                        <option>1989</option>
+                        <option>1990</option>
+                        <option>1991</option>
+                        <option>1992</option>
+                        <option>1993</option>
+                        <option>1994</option>
+                        <option>1995</option>
+                        <option>1996</option>
+                        <option>1997</option>
+                        <option>1998</option>
+                        <option>1999</option>
+                        <option>2000</option>
+                        <option>2001</option>
+                        <option>2002</option>
+                        <option>2003</option>
+                        <option>2004</option>
+                        <option>2005</option>
+                        <option>2006</option>
+                        <option>2007</option>
+                        <option>2008</option>
+                        <option>2009</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                        <option>2015</option>
+                        <option>2016</option>
+                        <option>2017</option>
+                        <option>2018</option>
                         <option>2019</option>
-                        <option selected>2020</option>
-                    </select>
+                        <option>2020</option>
+                        <option>2021</option>
+                        <option selected>2022</option>
+                    </select> 年
                 </div>
+                <input type="button" value="确定" onclick="timeFilter()">
             </div>
             <div class="filter typefilter">
                 <span></span><h2>文献类型</h2>
-                <ul>
-                    <li>
-                        <input type="radio" id="">
+                <ul id="types_list">
+                    <!-- <li>
+                        <input type="checkbox" name="" id="">
                         <label>期刊会议</label>
                     </li>
                     <li>
-                        <input type="radio" id="">
+                        <input type="checkbox" id="">
                         <label>书籍</label>
-                    </li>
+                    </li> -->
                 </ul>
+                <input type="button" value="确定" onclick="typeFilter()">
             </div>
             <div class="filter venuefilter">
                 <span></span><h2>期刊及会议</h2>
-                <ul>
-                    <li>
-                        <input type="radio" id="">
+                <ul id="venues_list">
+                    <!-- <li>
+                        <input type="checkbox" id="">
                         <label>Angewandte Chemie</label>
                     </li>
                     <li>
-                        <input type="radio" id="">
+                        <input type="checkbox" id="">
                         <label>Applied Microbiology</label>
-                    </li>
+                    </li> -->
                 </ul>
+                <input type="button" value="确定" onclick="venueFilter()">
             </div>
             <div class="filter fieldfilter">
                 <span></span><h2>研究领域</h2>
-                <ul>
-                    <li>
-                        <input type="radio" id="">
+                <ul id="subfields_list">
+                    <!-- <li>
+                        <input type="checkbox" id="">
                         <label>生物医学</label>
                     </li>
                     <li>
-                        <input type="radio" id="">
+                        <input type="checkbox" id="">
                         <label>诊断医学</label>
-                    </li>
+                    </li> -->
                 </ul>
+                <input type="button" value="确定" onclick="fieldFilter()">
             </div>
         </div>
     </div>

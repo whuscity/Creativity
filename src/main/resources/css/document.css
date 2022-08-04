@@ -63,13 +63,21 @@
     float: left;
     display: inline;
     width: 900px;
-    font-size: 18px;
+    font-size: 14px;
     line-height: 24px;
     display: none;
 }
 
 .metainfo .abstract>div.active{
     display: inline-block;
+}
+
+.structured_abstract{
+    display: none;
+}
+
+.structured_abstract.active {
+    display: inline;
 }
 
 .structured_abstract .structure_part .fold{
@@ -103,8 +111,6 @@
     line-height: 24px;
     display: none;
 }
-
-
 
 .structured_abstract .structure_part.active .fold .angle{
     transform: rotate(0deg)
@@ -239,4 +245,28 @@
 
 .ref .list table tr td:nth-child(2) {
     text-align: left;
+}
+
+.ref .list .pagination{
+    margin-left: 400px;
+}
+
+.ref .list .pagination *{
+    margin-left: 50px;
+    user-select: none;
+}
+
+.ref .list .pagination #citing_prev_page,
+.ref .list .pagination #citing_next_page,
+.ref .list .pagination #cited_prev_page,
+.ref .list .pagination #cited_next_page{
+    cursor: pointer;
+    color: #493f83;
+}
+
+.ref .list .pagination #citing_prev_page.disabled,
+.ref .list .pagination #citing_next_page.disabled,
+.ref .list .pagination #citing_prev_page.disabled,
+.ref .list .pagination #citing_next_page.disabled{
+    cursor: not-allowed;
 }
