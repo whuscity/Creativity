@@ -227,7 +227,7 @@ public class QueryResult {
         } else {
             boolQueryBuilder.should(QueryBuilders.termQuery("title.keyword", searchQuery.getQuery())).boost(20);
             boolQueryBuilder.should(QueryBuilders.termQuery("venue_name.keyword", searchQuery.getQuery())).boost(10); //TODO 提升权重有意义吗
-            boolQueryBuilder.should(QueryBuilders.combinedFieldsQuery(searchQuery.getQuery(), "title", "abstract_full", "keywords_str","venue_name").field("title", 2).field("keywords_str", 3)
+            boolQueryBuilder.must(QueryBuilders.combinedFieldsQuery(searchQuery.getQuery(), "title", "abstract_full", "keywords_str","venue_name").field("title", 2).field("keywords_str", 3)
                     .minimumShouldMatch("2<70%")
                     .operator(Operator.OR));
 

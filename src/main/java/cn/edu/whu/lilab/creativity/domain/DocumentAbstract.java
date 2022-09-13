@@ -40,16 +40,23 @@ public class DocumentAbstract {
     /**
      * 方法部分
      */
-    @TableField(value = "abstract_method")
+    @TableField(value = "abstract_objective")
     @ApiModelProperty(value = "方法部分")
-    private String abstractMethod;
+    private String abstractObjective;
+
+    /**
+     * 结果部分
+     */
+    @TableField(value = "abstract_results")
+    @ApiModelProperty(value = "结果部分")
+    private String abstractResults;
 
     /**
      * 结论部分
      */
-    @TableField(value = "abstract_conclusion")
+    @TableField(value = "abstract_conclusions")
     @ApiModelProperty(value = "结论部分")
-    private String abstractConclusion;
+    private String abstractConclusions;
 
     @TableField(value = "data_source")
     @ApiModelProperty(value = "")
