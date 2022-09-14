@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @TableName(value = "document_cite")
 public class DocumentCite {
-    @TableField(value = "id")
+    @TableId(value = "id", type = IdType.INPUT)
     @ApiModelProperty(value = "")
     private Integer id;
 

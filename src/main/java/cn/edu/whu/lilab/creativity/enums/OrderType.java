@@ -13,7 +13,7 @@ public enum OrderType {
 
     RELEVANCE("_score","相关度排序"),
     CREATIVITY_INDEX("creativity_index","创新指数排序"),
-    PUBLICATION_DATE("publish_date","论文发表时间排序"),
+    PUBLICATION_YEAR("publish_year","论文发表年排序"),
     CITE_COUNT("cite_count","论文引用数排序");
 
 

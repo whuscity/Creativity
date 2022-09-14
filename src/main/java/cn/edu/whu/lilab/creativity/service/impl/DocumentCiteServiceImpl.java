@@ -34,8 +34,8 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     public Page<CiteRelationPaperDto> findRefById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
 
         switch (orderType) {
-            case "publish_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
+            case "publish_year":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_YEAR.getCode()));
                 break;
             case "cite_count":
                 page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
@@ -59,8 +59,8 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
     @Override
     public Page<CiteRelationPaperDto> findCitingById(String pmid, Page<CiteRelationPaperDto> page, String orderType) {
         switch (orderType) {
-            case "publish_date":
-                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_DATE.getCode()));
+            case "publish_year":
+                page.addOrder(OrderItem.desc(OrderType.PUBLICATION_YEAR.getCode()));
                 break;
             case "cite_count":
                 page.addOrder(OrderItem.desc(OrderType.CITE_COUNT.getCode()));
@@ -72,6 +72,8 @@ public class DocumentCiteServiceImpl extends ServiceImpl<DocumentCiteMapper, Doc
         return documentCiteMapper.getCitingListById(page, documentId);
     }
 }
+
+
 
 
 

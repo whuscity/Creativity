@@ -72,4 +72,8 @@ public class DocumentVenues {
     @TableField(value = "venue_type")
     @ApiModelProperty(value = "出版物类型")
     private String venueType;
+
+    @TableField(value = "data_source")
+    @ApiModelProperty(value = "")
+    private String dataSource;
 }

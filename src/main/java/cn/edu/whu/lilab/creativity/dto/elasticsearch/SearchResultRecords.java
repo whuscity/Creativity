@@ -1,4 +1,4 @@
-package cn.edu.whu.lilab.creativity.dto;
+package cn.edu.whu.lilab.creativity.dto.elasticsearch;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -6,17 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ApiModel(description = "查询结果DTO对象")
-public class SearchResultDto {
+@ApiModel(description = "查询结果记录")
+public class SearchResultRecords implements Serializable {
 
     @ApiModelProperty(value = "文档id")
     private String documentId;
 
+
     @ApiModelProperty(value = "外部id // pmid")
     private String externalId;
+
 
     @ApiModelProperty(value = "doi号")
     private String doi;
@@ -43,9 +47,14 @@ public class SearchResultDto {
     private String citeCount;
 
     @ApiModelProperty(value = "发表时间")
-    private String publishDate;
+    private Integer publishYear;
+
+    @ApiModelProperty(value = "出版物名")
+    private String venueName;
 
 
+    @ApiModelProperty(value = "所属子领域")
+    private String subfield;
 
 
 }

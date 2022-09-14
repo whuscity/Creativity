@@ -1,11 +1,14 @@
 package cn.edu.whu.lilab.creativity.elasticsearch;
 
 import cn.edu.whu.lilab.creativity.constants.EsConstants;
-import cn.edu.whu.lilab.creativity.dto.SearchResultDto;
+import cn.edu.whu.lilab.creativity.dto.SearchQuery;
+import cn.edu.whu.lilab.creativity.dto.SearchResult;
+import cn.edu.whu.lilab.creativity.dto.elasticsearch.AggRecords;
+import cn.edu.whu.lilab.creativity.dto.elasticsearch.SearchResultRecords;
 import cn.edu.whu.lilab.creativity.enums.OrderType;
 import cn.edu.whu.lilab.creativity.enums.SearchType;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import lombok.extern.slf4j.Slf4j;
@@ -16,8 +19,13 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.aggregations.AggregationBuilders;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +35,7 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Component
 @Slf4j
@@ -36,27 +45,29 @@ public class QueryResult {
     private RestHighLevelClient restHighLevelClient;
 
     /**
-     * 展示索引及映射  已利用kibana构建索引及映射
+     * 展示索引及映射  实际利用kibana构建
      *
      * @throws IOException
      */
     private void createIndex() throws IOException {
         CreateIndexRequest createIndexRequest = new CreateIndexRequest("documents_info");
-        createIndexRequest.mapping(" {\n" +
+        createIndexRequest.mapping("{\n" +
+                "    \"properties\": {\n" +
                 "      \"external_id\": {\n" +
                 "        \"type\": \"keyword\"\n" +
                 "      },\n" +
                 "      \"title\": {\n" +
                 "        \"type\": \"text\",\n" +
-                "        \"analyzer\": \"english\", \n" +
+                "        \"analyzer\": \"english\",\n" +
                 "        \"fields\": {\n" +
-                "          \"keyword\":{\n" +
-                "            \"type\":\"keyword\"\n" +
+                "          \"keyword\": {\n" +
+                "            \"type\": \"keyword\"\n" +
                 "          }\n" +
                 "        }\n" +
                 "      },\n" +
                 "      \"authors_name_str\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
                 "      },\n" +
                 "      \"document_type\": {\n" +
                 "        \"type\": \"keyword\"\n" +
@@ -65,97 +76,197 @@ public class QueryResult {
                 "        \"type\": \"text\"\n" +
                 "      },\n" +
                 "      \"abstract_short\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
+                "      },\n" +
+                "       \"abstract_full\": {\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
                 "      },\n" +
                 "      \"keywords_str\": {\n" +
-                "        \"type\": \"text\"\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\"\n" +
                 "      },\n" +
                 "      \"cite_count\": {\n" +
                 "        \"type\": \"integer\"\n" +
                 "      },\n" +
-                "      \"publish_date\": {\n" +
-                "        \"type\": \"date\"\n" +
-                "      },\n" +
-                "      \"document_id\":{\n" +
+                "      \"publish_year\": {\n" +
                 "        \"type\": \"integer\"\n" +
                 "      },\n" +
-                "      \"doi\":{\n" +
-                "        \"type\":\"keyword\"\n" +
+                "      \"document_id\": {\n" +
+                "        \"type\": \"integer\"\n" +
+                "      },\n" +
+                "      \"doi\": {\n" +
+                "        \"type\": \"keyword\"\n" +
+                "      },\n" +
+                "      \"venue_name\": {\n" +
+                "        \"type\": \"text\",\n" +
+                "        \"analyzer\": \"english\",\n" +
+                "        \"fields\": {\n" +
+                "          \"keyword\": {\n" +
+                "            \"type\": \"keyword\"\n" +
+                "          }\n" +
+                "        }\n" +
+                "      },\n" +
+                "      \"subfield\": {\n" +
+                "        \"type\": \"keyword\"\n" +
                 "      }\n" +
-                "    }", XContentType.JSON);
+                "    }\n" +
+                "  }", XContentType.JSON);
         CreateIndexResponse createIndexResponse = restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
         log.info("是否创建索引成功：{}", createIndexResponse.isAcknowledged());
         restHighLevelClient.close(); //关闭资源
     }
 
     /**
-     * 基于标题查询
+     * 增加过滤查询条件并判断查询类型
      *
-     * @param titleQuery
-     * @param page
-     * @param orderType
+     * @param searchQuery
      * @return
-     * @throws IOException
      */
-    public void searchByTitle(String titleQuery, Page<SearchResultDto> page, String orderType) {
-
+    public SearchResult search(SearchQuery searchQuery) {
 
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder().trackTotalHits(true);
 
-        //如果查询条件为空
-        if(StringUtils.isEmpty(titleQuery) || titleQuery.equals("")){
-            sourceBuilder.query(QueryBuilders.matchAllQuery())
-                    .from((int) ((page.getCurrent() - 1) * page.getSize())) //起始位置
-                    .size((int) page.getSize());
-            if(StringUtils.isEmpty(orderType) || orderType.equals("")){
-                orderType = OrderType.PUBLICATION_DATE.getCode();
-            }
-             getSearchResultDtos(sourceBuilder,page, orderType);
+        BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
+        //1.增加过滤条件
+        addFilter(searchQuery, boolQueryBuilder);
+        //2.增加查询条件
+        addSearch(searchQuery, boolQueryBuilder);
+        sourceBuilder.query(boolQueryBuilder);
+
+
+        //3.增加聚合条件 桶聚合
+        sourceBuilder.aggregation(AggregationBuilders.terms("documentType_agg").field("document_type").size(EsConstants.MAX_AGG_COUNT));
+        sourceBuilder.aggregation(AggregationBuilders.terms("venueName_agg").field("venue_name.keyword").size(EsConstants.MAX_AGG_COUNT));
+        sourceBuilder.aggregation(AggregationBuilders.terms("subfield_agg").field("subfield").size(EsConstants.MAX_AGG_COUNT));
+
+        //4.返回指定字段
+        String[] includeFileds = new String[]{"document_id", "external_id", "doi", "title", "document_type", "authors_name_str", "venue_str", "abstract_short", "keywords_str", "cite_count", "publish_year", "venue_name", "subfield"};
+        String[] excluedFileds = new String[]{};
+        sourceBuilder.fetchSource(includeFileds, excluedFileds);
+        SearchResult searchResult = new SearchResult(searchQuery);
+
+        getSearchResultDtos(searchQuery, searchResult, sourceBuilder);
+        return searchResult;
+
+    }
+
+    /**
+     * 增加过滤条件
+     *
+     * @param searchQuery
+     * @param boolQueryBuilder
+     */
+    private void addFilter(SearchQuery searchQuery, BoolQueryBuilder boolQueryBuilder) {
+        //1.基于出版年过滤
+        if (searchQuery.getStartPublishYear() != null && searchQuery.getStartPublishYear() != null) {
+            boolQueryBuilder.filter(QueryBuilders.rangeQuery("publish_year")
+                    .gte(searchQuery.getStartPublishYear())
+                    .lte(searchQuery.getEndPublishYear()));
         }
-        //分页查询
-        sourceBuilder.query(QueryBuilders.matchQuery(SearchType.TITLE.getCode(),titleQuery))
+        //2.基于文档类型过滤
+        if (searchQuery.getDocumentType() != null && searchQuery.getDocumentType().size() != 0) {
+            boolQueryBuilder.filter(QueryBuilders.termsQuery("document_type", searchQuery.getDocumentType()));
+        }
+        //3.基于出版物名过滤
+        if (searchQuery.getVenueName() != null && searchQuery.getVenueName().size() != 0) {
+            boolQueryBuilder.filter(QueryBuilders.termsQuery("venue_name.keyword", searchQuery.getVenueName()));
+        }
+        //4.基于研究领域过滤
+        if (searchQuery.getSubfield() != null && searchQuery.getSubfield().size() != 0) {
+            boolQueryBuilder.filter(QueryBuilders.termsQuery("subfield", searchQuery.getSubfield()));
+        }
+    }
 
-        // sourceBuilder.query(QueryBuilders.multiMatchQuery(titleQuery,SearchType.TITLE.getCode(),SearchType.TITLE.getCode()+".keyword"))
+    /**
+     * 增加查询条件
+     *
+     * @param searchQuery
+     * @param boolQueryBuilder
+     */
+    private void addSearch(SearchQuery searchQuery, BoolQueryBuilder boolQueryBuilder) {
+        // 判断查询类型：title、doi、pmid
+        //doi: 10.+ 四位数字 + / + 无限制后缀
+        Pattern doiPattern = Pattern.compile("^10\\.\\d{4}/.+$");
+        //pmid: 全数字 最大八位
+        Pattern pmidPattern = Pattern.compile("^\\d{1,8}$");
 
-                .from((int) ((page.getCurrent() - 1) * page.getSize())) //起始位置
-                .size((int) page.getSize());
+        //防止抛异常
+        if (StringUtils.isEmpty(searchQuery.getQuery())) {
+            searchQuery.setQuery("");
+        }
 
-         getSearchResultDtos(sourceBuilder, page,orderType);
+        //2.增加查询条件
+        if (doiPattern.matcher(searchQuery.getQuery()).matches()) { //doi查询
+            searchByDoi(searchQuery, boolQueryBuilder);
+        } else if (pmidPattern.matcher(searchQuery.getQuery()).matches()) { //pmid查询
+            searchByPmid(searchQuery, boolQueryBuilder);
+        } else { //title查询
+            searchByTitle(searchQuery, boolQueryBuilder);
+        }
+    }
+
+
+    /**
+     * 基于标题查询
+     *
+     * @param searchQuery
+     * @param boolQueryBuilder
+     * @return
+     */
+    private void searchByTitle(SearchQuery searchQuery, BoolQueryBuilder boolQueryBuilder) {
+
+        //如果查询条件为空
+        if (StringUtils.isEmpty(searchQuery.getQuery()) || searchQuery.getQuery().equals("")) {
+            boolQueryBuilder.must(QueryBuilders.matchAllQuery());
+            if (StringUtils.isEmpty(searchQuery.getOrderType()) || searchQuery.getOrderType().equals("")) {
+                searchQuery.setOrderType(OrderType.PUBLICATION_YEAR.getCode());
+            }
+
+        } else {
+            boolQueryBuilder.should(QueryBuilders.termQuery("title.keyword", searchQuery.getQuery())).boost(20);
+            boolQueryBuilder.should(QueryBuilders.termQuery("venue_name.keyword", searchQuery.getQuery())).boost(10); //TODO 提升权重有意义吗
+            boolQueryBuilder.must(QueryBuilders.combinedFieldsQuery(searchQuery.getQuery(), "title", "abstract_full", "keywords_str","venue_name").field("title", 2).field("keywords_str", 3)
+                    .minimumShouldMatch("2<70%")
+                    .operator(Operator.OR));
+
+        }
 
     }
 
     /**
      * 基于doi查询
      *
-     * @param doi
+     * @param searchQuery
+     * @param boolQueryBuilder
      * @return
      */
-    public void searchByDoi(String doi, Page<SearchResultDto> page, String orderType) {
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.termQuery(SearchType.DOI.getCode(), doi));
-         getSearchResultDtos(sourceBuilder, page,orderType);
+    private void searchByDoi(SearchQuery searchQuery, BoolQueryBuilder boolQueryBuilder) {
+        boolQueryBuilder.must(QueryBuilders.termQuery(SearchType.DOI.getCode(), searchQuery.getQuery()));
+
     }
 
     /**
      * 基于pmid查询
      *
-     * @param pmid
+     * @param searchQuery
+     * @param boolQueryBuilder
      * @return
      */
-    public void searchByPmid(String pmid, Page<SearchResultDto> page, String orderType) {
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-        sourceBuilder.query(QueryBuilders.termQuery(SearchType.PMID.getCode(), pmid));
-         getSearchResultDtos(sourceBuilder, page,orderType);
+    private void searchByPmid(SearchQuery searchQuery, BoolQueryBuilder boolQueryBuilder) {
+        boolQueryBuilder.must(QueryBuilders.termQuery(SearchType.PMID.getCode(), searchQuery.getQuery()));
     }
 
-    private void getSearchResultDtos(SearchSourceBuilder sourceBuilder, Page<SearchResultDto> page, String orderType) {
-        if(StringUtils.isEmpty(orderType) || orderType.equals("")){
-            orderType = OrderType.RELEVANCE.getCode();
+
+    private void getSearchResultDtos(SearchQuery searchQuery, SearchResult searchResult, SearchSourceBuilder sourceBuilder) {
+        if (StringUtils.isEmpty(searchQuery.getOrderType()) || searchQuery.getOrderType().equals("")) {
+            searchQuery.setOrderType(OrderType.RELEVANCE.getCode());
         }
-        //排序依据
-        switch (orderType) {
-            case "publish_date":
-                sourceBuilder.sort(OrderType.PUBLICATION_DATE.getCode(), SortOrder.DESC)
+        //1.增加排序依据
+        switch (searchQuery.getOrderType()) {
+            case "publish_year":
+                sourceBuilder.sort(OrderType.PUBLICATION_YEAR.getCode(), SortOrder.DESC)
                         .sort(OrderType.RELEVANCE.getCode(), SortOrder.DESC);
                 break;
             case "cite_count":
@@ -164,9 +275,13 @@ public class QueryResult {
                 break;
             default: //默认相关度排序
                 sourceBuilder.sort(OrderType.RELEVANCE.getCode(), SortOrder.DESC)
-                        .sort(OrderType.PUBLICATION_DATE.getCode(), SortOrder.DESC);
+                        .sort(OrderType.PUBLICATION_YEAR.getCode(), SortOrder.DESC);
 
         }
+
+        // 2.增加分页查询
+        sourceBuilder.from((int) ((searchQuery.getCurrent() - 1) * searchQuery.getSize())) //起始位置
+                .size((int) searchQuery.getSize());
 
         SearchRequest searchRequest = new SearchRequest("documents_info");
         searchRequest.source(sourceBuilder);
@@ -175,49 +290,82 @@ public class QueryResult {
             searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         } catch (IOException e) {
             e.printStackTrace();
-            return ;
+            return;
         }
-        //击中记录总数
+        if (!searchResponse.status().equals(RestStatus.OK)) {
+            return;
+        }
+        // 1.设置击中记录总数
         long hitTotal = searchResponse.getHits().getTotalHits().value;
-        log.info("击中记录数{}",hitTotal);
+        searchResult.setHitTotal(hitTotal);
+        log.info("击中记录数{}", hitTotal);
         if (hitTotal == 0) {
-            return ;
+            return;
         }
 
+        // 2.设置查询结果记录
         SearchHit[] hits = searchResponse.getHits().getHits();
-        List<SearchResultDto> searchResultDtos = new ArrayList<>();
+        List<SearchResultRecords> searchResultRecordsList = new ArrayList<>();
         for (SearchHit hit : hits) {
-            SearchResultDto searchResultDto = null;
+            SearchResultRecords searchResultRecords = null;
             try {
-                searchResultDto = new ObjectMapper().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
-                        .readValue(hit.getSourceAsString(), SearchResultDto.class);
-                searchResultDtos.add(searchResultDto);
+                searchResultRecords = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                        .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE)
+                        .readValue(hit.getSourceAsString(), SearchResultRecords.class);
+                searchResultRecordsList.add(searchResultRecords);
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
                 continue;
             }
 
         }
+        searchResult.setSearchResultRecords(searchResultRecordsList);
 
-        setMaxPages(page, (int) hitTotal);
-         page.setRecords(searchResultDtos).setTotal(hitTotal);
+        //获取聚合结果
+        // 3.设置文档类型记录
+        List<AggRecords> documentTypeRecordsList = new ArrayList<>();
+        Terms documentTypeAggResultList = searchResponse.getAggregations().get("documentType_agg");
+        for (Terms.Bucket buck : documentTypeAggResultList.getBuckets()) {
+            AggRecords documentTypeRecords = new AggRecords(buck.getKeyAsString(), buck.getDocCount());
+            documentTypeRecordsList.add(documentTypeRecords);
+        }
+        searchResult.setDocumentTypeRecords(documentTypeRecordsList);
 
+        // 4.设置出版物名记录
+        List<AggRecords> venueNameRecordsList = new ArrayList<>();
+        Terms venueNameAggResultList = searchResponse.getAggregations().get("venueName_agg");
+        for (Terms.Bucket buck : venueNameAggResultList.getBuckets()) {
+            AggRecords venueNameRecords = new AggRecords(buck.getKeyAsString(), buck.getDocCount());
+            venueNameRecordsList.add(venueNameRecords);
+        }
+        searchResult.setVenueNameRecords(venueNameRecordsList);
+
+        // 5.设置所属子领域记录
+        List<AggRecords> subfieldRecordsList = new ArrayList<>();
+        Terms subfieldAggResultList = searchResponse.getAggregations().get("subfield_agg");
+        for (Terms.Bucket buck : subfieldAggResultList.getBuckets()) {
+            AggRecords subfieldRecords = new AggRecords(buck.getKeyAsString(), buck.getDocCount());
+            subfieldRecordsList.add(subfieldRecords);
+        }
+        searchResult.setSubfieldRecords(subfieldRecordsList);
     }
 
+
     /**
-     * 基于设置的最大查询数上限，计算最大页数
+     * 基于设置的最大查询数上限，注意此处无效
      *
      * @param page
      * @param total
      */
-    private void setMaxPages(Page<SearchResultDto> page,  int total) {
-        if (page.getSize() != 0 && total > EsConstants.MAX_RESULT_COUNT) {
-            long pages = EsConstants.MAX_RESULT_COUNT / page.getSize();
-            if (EsConstants.MAX_RESULT_COUNT % page.getSize() != 0) {
-                pages++;
-            }
-            page.setPages(pages);
-        }
-    }
+    // private void setMaxPages(Page<SearchResultDto> page,  int total) {
+    //     if (page.getSize() != 0 && total > EsConstants.MAX_RESULT_COUNT) {
+    //         long pages = EsConstants.MAX_RESULT_COUNT / page.getSize();
+    //         if (EsConstants.MAX_RESULT_COUNT % page.getSize() != 0) {
+    //             pages++;
+    //         }
+    //         page.setPages(pages);
+    //     }
+    // }
+
 
 }

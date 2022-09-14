@@ -9,9 +9,10 @@
     <result column="keyword_str" jdbcType="VARCHAR" property="keywordStr" />
     <result column="keyword_type" jdbcType="VARCHAR" property="keywordType" />
     <result column="keyword_ext_info" jdbcType="LONGVARCHAR" property="keywordExtInfo" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    keyword_id, document_id, keyword_str, keyword_type, keyword_ext_info
+    keyword_id, document_id, keyword_str, keyword_type, keyword_ext_info, data_source
   </sql>
 </mapper>

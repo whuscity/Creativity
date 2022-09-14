@@ -17,11 +17,12 @@
     <result column="author_affiliation_name" jdbcType="VARCHAR" property="authorAffiliationName" />
     <result column="author_address" jdbcType="VARCHAR" property="authorAddress" />
     <result column="author_email" jdbcType="VARCHAR" property="authorEmail" />
+    <result column="data_source" jdbcType="VARCHAR" property="dataSource" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     author_id, document_id, author_display_name, author_rank, is_corresponding_author, 
     is_first_author, author_type, author_last_name, author_fore_name, author_initials, 
-    author_affiliation_name, author_address, author_email
+    author_affiliation_name, author_address, author_email, data_source
   </sql>
 </mapper>

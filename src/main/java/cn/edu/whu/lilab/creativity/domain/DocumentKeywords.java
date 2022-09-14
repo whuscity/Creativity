@@ -50,4 +50,8 @@ public class DocumentKeywords {
     @TableField(value = "keyword_ext_info")
     @ApiModelProperty(value = "附加信息")
     private String keywordExtInfo;
+
+    @TableField(value = "data_source")
+    @ApiModelProperty(value = "")
+    private String dataSource;
 }

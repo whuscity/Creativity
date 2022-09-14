@@ -1,17 +1,10 @@
 package cn.edu.whu.lilab.creativity.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -47,4 +40,6 @@ public class DocumentInfoDto {
     @ApiModelProperty(value = "创新三元组")
     private String triplesStrList;
 
+    @ApiModelProperty(value = "展示出版物信息")
+    private String venueStr;
 }
