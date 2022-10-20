@@ -28,8 +28,8 @@ categories: tables
 | 5     | venue_year         | 出版物年     | VARCHAR(8)   |          |          |            |              |
 | 6     | venue_volume       | 出版物卷     | VARCHAR(16)  |          |          |            |              |
 | 7     | venue_issue        | 出版物期     | VARCHAR(16)  |          |          |            |              |
-| 8     | venue_page         | 出版物页     | VARCHAR(16)  |          |          |            |              |
-| 9     | venue_type         | 出版物类型   | VARCHAR(32)  |          |          |            |              |
+| 8     | venue_page         | 出版物页     | VARCHAR(64)  |          |          |            |              |
+| 9     | venue_type         | 出版物类型   | VARCHAR(255)  |          |          |            |              |
 | 10    | data_source        | 数据源       | VARCHAR(255) |          |          |            |              |
 | 11    | domain             |              | VARCHAR(255) |          |          |            |              |
 | 12    | field              |              | VARCHAR(255) |          |          |            |              |

@@ -62,7 +62,7 @@ PARTITIONS 32;
 ### 创建索引
 
 ```SQL
-CREATE INDEX document_id ON document_authors(document_id);
+CREATE INDEX document_id ON document_keywords(document_id);
 ```
 
 ## 更新日志
