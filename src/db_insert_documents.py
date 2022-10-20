@@ -28,7 +28,7 @@ VALUES
 
 sql_document_abstract_structure = """
 INSERT INTO document_abstract_structure
-(document_id, order, texts, label, data_source)
+(document_id, sentence_id, texts, label, data_source)
 VALUES
 (%s,%s,%s,%s,%s)
 """
@@ -65,7 +65,7 @@ class Base:
         :return: 连接池
         """
         pool = PooledDB(creator=pymysql,
-                        maxconnections=12,  # 连接池允许的最大连接数，0和None表示不限制连接数
+                        maxconnections=0,  # 连接池允许的最大连接数，0和None表示不限制连接数
                         mincached=0,  # 初始化时，链接池中至少创建的空闲的链接，0表示不创建
                         maxcached=None,  # 链接池中最多闲置的链接，0和None不限制
                         maxusage=None,  # 一个链接最多被重复使用的次数，None表示无限制
@@ -186,7 +186,7 @@ class Base:
                     i = 0
                     abstract_text = ""
                     for abstractText in abstractTexts:
-                        abstract = abstractText.text
+                        abstract = abstractText.text if abstractText.text else ''
                         abstract_text += (abstract + ' ')
                         if 'Label' in abstractText.attrib.keys():
                             i += 1
@@ -259,7 +259,7 @@ class Base:
                             local_obj.author_insert = []
                             gc.collect()
         
-                        local_obj.venues_insert.append((id, venue_str[:511], journal_title[:255], j_p_year, journal_volume[:16], journal_issue[:16], pagination[:32],publication_type,filename,issn,domain,field,subfield))
+                        local_obj.venues_insert.append((id, venue_str[:511], journal_title[:255], j_p_year, journal_volume[:16], journal_issue[:16], pagination[:32], publication_type,filename,issn,domain,field,subfield))
 
                         if len(local_obj.venues_insert) >= 950:
                             self.save_mysql_many(sql_document_venues,local_obj.venues_insert, filename)
@@ -336,6 +336,6 @@ if __name__ == '__main__':
                         "subfield": subfield,
                     }
     b = Base()
-    sem=threading.Semaphore(12)
-    b.multi_worker(filepaths, 12)
+    sem=threading.Semaphore(24)
+    b.multi_worker(filepaths, 24)
     

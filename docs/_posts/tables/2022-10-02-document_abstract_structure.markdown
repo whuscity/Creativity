@@ -22,7 +22,7 @@ categories: tables
 | **#** |  **字段**   | **名称** | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
 | :---: | :---------: | :------: | :----------: | :------: | :------: | :--------: | :----------: |
 |   1   | document_id |    id    |     INT      |    √     |    √     |            |              |
-|   2   |    order    | 内容顺序 |     INT      |    √     |    √     |            |              |
+|   2   | sentence_id | 内容顺序 |     INT      |    √     |    √     |            |              |
 |   3   |    texts    | 内容全文 |     TEXT     |          |          |            |              |
 |   4   |    label    | 内容类型 |     TEXT     |          |          |            |              |
 |   5   | data_source |  数据源  | VARCHAR(255) |          |          |            |              |
@@ -45,11 +45,11 @@ categories: tables
 DROP TABLE IF EXISTS document_abstract_structure;
 CREATE TABLE document_abstract_structure(
     document_id INT NOT NULL   COMMENT 'id' ,
-    order INT NOT NULL   COMMENT '内容顺序' ,
+    sentence_id INT NOT NULL   COMMENT '内容顺序' ,
     texts TEXT    COMMENT '内容全文' ,
     label TEXT    COMMENT '内容类型' ,
     data_source VARCHAR(255)    COMMENT '数据源' ,
-    PRIMARY KEY (document_id,order)
+    PRIMARY KEY (document_id,sentence_id)
 )  COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
