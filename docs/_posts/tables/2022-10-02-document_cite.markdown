@@ -5,6 +5,8 @@ date: 2022-10-02 14:16:29 +0800
 categories: tables
 ---
 
+> [Creativity | Data](/Creativity) > [Tables](/Creativity/tables) > document_cite
+
 # document_cite
 
 ![Author](https://img.shields.io/badge/Author-MarioZZJ-blue)
