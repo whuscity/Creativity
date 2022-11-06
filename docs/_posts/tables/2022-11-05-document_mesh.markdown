@@ -77,4 +77,4 @@ CREATE INDEX qualifier_ui ON document_mesh(qualifier_ui);
 ## 更新日志
 
 * 221105：根据 MeSH 特性重构表，存储预处理后数据，提升性能。
-* [221025](/Creativity/tables/2022/10/02/archive_document_mesh.html)：标准化创建。
+* [221025](/Creativity/tables/2022/10/25/archive_document_mesh.html)：标准化创建。
