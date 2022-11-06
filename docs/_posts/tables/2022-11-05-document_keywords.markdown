@@ -5,7 +5,7 @@ date: 2022-11-05 20:00:00 +0800
 categories: tables
 ---
 
-> [Creativity | Data](/Creativity) > [Tables](/Creativity/tables) > document_keywords
+> [Creativity-Data](/Creativity) > [Tables](/Creativity/tables) > document_keywords
 
 # document_keywords
 

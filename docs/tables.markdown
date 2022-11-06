@@ -1,4 +1,4 @@
-> [Creativity | Data](/Creativity) > Tables
+> [Creativity-Data](/Creativity) > Tables
 
 * [documents](/Creativity/tables/2022/10/02/documents.html)
 

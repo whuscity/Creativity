@@ -5,7 +5,7 @@
 layout: default
 ---
 
-> Creativity | Data
+> Creativity-Data
 
 * [Tables](/Creativity/tables)
 * [datasource](/Creativity/datasource)
