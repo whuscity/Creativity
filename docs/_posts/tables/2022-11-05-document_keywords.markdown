@@ -72,4 +72,4 @@ CREATE INDEX keyword_id ON document_keywords(keyword_id);
 ## 更新日志
 
 * 221105：考虑多源（Mesh、Chemical、Keyword、Pubtator）词特性，统一重构表。
-* [221002](./tables/2022/10/02/archive_document_keywords.html)：标准化创建。
+* [221002](/Creativity/tables/2022/10/02/archive_document_keywords.html)：标准化创建。

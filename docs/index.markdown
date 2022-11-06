@@ -5,4 +5,4 @@
 layout: default
 ---
 
-[Tables](./tables)
+[Tables](/Creativity/tables)
