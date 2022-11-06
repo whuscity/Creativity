@@ -15,7 +15,7 @@ categories: tables
 
 说明：文档摘要成分（Pubmed 自带信息）
 
-更新日期：2022-10-02
+更新日期：2022-11-05
 
 ## 字段明细
 
@@ -24,7 +24,7 @@ categories: tables
 |   1   | document_id |    id    |     INT      |    √     |    √     |            |              |
 |   2   | sentence_id | 内容顺序 |     INT      |    √     |    √     |            |              |
 |   3   |    texts    | 内容全文 |     TEXT     |          |          |            |              |
-|   4   |    label    | 内容类型 |     TEXT     |          |          |            |              |
+|   4   |    label    | 内容类型 | VARCHAR(64)  |          |          |            |              |
 |   5   | data_source |  数据源  | VARCHAR(255) |          |          |            |              |
 
 ## 索引
@@ -47,7 +47,7 @@ CREATE TABLE document_abstract_structure(
     document_id INT NOT NULL   COMMENT 'id' ,
     sentence_id INT NOT NULL   COMMENT '内容顺序' ,
     texts TEXT    COMMENT '内容全文' ,
-    label TEXT    COMMENT '内容类型' ,
+    label VARCHAR(64)    COMMENT '内容类型' ,
     data_source VARCHAR(255)    COMMENT '数据源' ,
     PRIMARY KEY (document_id,sentence_id)
 )  COMMENT = ''
@@ -59,4 +59,5 @@ PARTITIONS 32;
 
 ## 更新日志
 
+* 221105：修改 `label` 字段数据类型（`TEXT` -> `VARCHAR(64)`）。
 * 221002：标准化创建。

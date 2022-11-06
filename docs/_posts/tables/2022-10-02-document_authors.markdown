@@ -15,7 +15,7 @@ categories: tables
 
 说明：论文作者
 
-更新日期：2022-10-02
+更新日期：2022-11-05
 
 ## 字段明细
 
@@ -31,8 +31,8 @@ categories: tables
 | 8     | author_last_name        | 作者姓       | VARCHAR(128)  |          |          |            |                          |
 | 9     | author_fore_name        | 作者名       | VARCHAR(128)  |          |          |            |                          |
 | 10    | author_initials         | 作者名缩写   | VARCHAR(16)   |          |          |            |                          |
-| 11    | author_affiliation_name | 作者单位     | VARCHAR(511)  |          |          |            | 规则：分号分隔           |
-| 12    | author_address          | 作者地址     | VARCHAR(1023) |          |          |            |                          |
+| 11    | author_affiliation_name | 作者单位     | TEXT  |          |          |            |            |
+| 12    | author_address          | 作者地址     | TEXT |          |          |            |                          |
 | 13    | author_email            | 作者电邮     | VARCHAR(128)  |          |          |            |                          |
 | 14    | data_source             | 数据源       | VARCHAR(255)  |          |          |            |                          |
 
@@ -66,8 +66,8 @@ CREATE TABLE document_authors(
     author_last_name VARCHAR(128)    COMMENT '作者姓' ,
     author_fore_name VARCHAR(128)    COMMENT '作者名' ,
     author_initials VARCHAR(16)    COMMENT '作者名缩写' ,
-    author_affiliation_name VARCHAR(511)    COMMENT '作者单位;规则：分号分隔' ,
-    author_address VARCHAR(1023)    COMMENT '作者地址' ,
+    author_affiliation_name TEXT    COMMENT '作者单位' ,
+    author_address TEXT    COMMENT '作者地址' ,
     author_email VARCHAR(128)    COMMENT '作者电邮' ,
     data_source VARCHAR(255)    COMMENT '数据源' ,
     PRIMARY KEY (author_id)
@@ -85,4 +85,5 @@ CREATE INDEX author_id ON document_authors(author_id);
 
 ## 更新日志
 
+* 221105：修改 `author_affiliation_name`、`author_address` 字段数据类型（`VARCHAR` -> `TEXT`）。
 * 221002：标准化创建。

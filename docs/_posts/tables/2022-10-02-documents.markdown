@@ -15,7 +15,7 @@ categories: tables
 
 说明：文档基础信息
 
-更新日期：2022-10-02
+更新日期：2022-11-05
 
 ## 字段明细
 
@@ -25,11 +25,11 @@ categories: tables
 |   2   |     external_id      |    外部 id     | VARCHAR(32)  |          |          |            |                            |
 |   3   |   external_id_type   |  外部 id 类型  | VARCHAR(32)  |          |          |            |                            |
 |   4   |        title         |    文档标题    | VARCHAR(255) |          |          |            |                            |
-|   5   |   authors_name_str   |  展示作者姓名  | VARCHAR(511) |          |          |            | 规则：多个项目时，分号分隔 |
+|   5   |   authors_name_str   |  展示作者姓名  | VARCHAR(511) |          |          |            | 规则：多个项目时，`|`分隔 |
 |   6   |    document_type     |    文档类型    | VARCHAR(255) |          |          |            |                            |
 |   7   |      venue_str       | 展示出版物信息 | VARCHAR(255) |          |          |            |                            |
 |   8   |    abstract_short    |    展示摘要    | VARCHAR(511) |          |          |            |                            |
-|   9   |     keywords_str     |   展示关键词   | VARCHAR(511) |          |          |            | 规则：多个项目时，分号分隔 |
+|   9   |     keywords_str     |   展示关键词   | VARCHAR(511) |          |          |            | 规则：多个项目时，`|`分隔 |
 |  10   |         doi          |                | VARCHAR(64)  |          |          |            |                            |
 |  11   |     publish_date     |    发表时间    | VARCHAR(128) |          |          |            |                            |
 |  12   |     publish_year     |    发表年份    |     INT      |          |          |            |                            |
@@ -95,4 +95,5 @@ CREATE INDEX doi ON documents(doi);
 
 ## 更新日志
 
+* 221106：统一分隔符为 `|`。
 * 221002：标准化创建。
