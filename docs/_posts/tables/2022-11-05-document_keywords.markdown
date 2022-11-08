@@ -57,7 +57,7 @@ keyword_id VARCHAR(32) COMMENT '关键词 id',
 keyword VARCHAR(64) COMMENT '关键词',
 major_topic_yn VARCHAR(1) COMMENT '是主要主题',
 data_source VARCHAR(255) COMMENT '数据源' ,
-PRIMARY KEY (keyword_id, keyword_type, keyword_id)
+PRIMARY KEY (document_id, keyword_type, keyword_id)
 ) COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;

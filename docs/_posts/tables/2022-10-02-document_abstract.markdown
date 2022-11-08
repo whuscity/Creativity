@@ -49,14 +49,14 @@ categories: tables
 DROP TABLE IF EXISTS document_abstract;
 CREATE TABLE document_abstract(
 document_id INT NOT NULL COMMENT 'id' ,
-abstract_full TEXTCOMMENT '摘要全文' ,
-abstract_background TEXTCOMMENT '背景部分' ,
-abstract_objective TEXTCOMMENT '目标部分' ,
-abstract_results TEXTCOMMENT '结果部分' ,
-abstract_conclusions TEXTCOMMENT '结论部分' ,
-data_source VARCHAR(255)COMMENT '数据源' ,
+abstract_full TEXT COMMENT '摘要全文' ,
+abstract_background TEXT COMMENT '背景部分' ,
+abstract_objective TEXT COMMENT '目标部分' ,
+abstract_results TEXT COMMENT '结果部分' ,
+abstract_conclusions TEXT COMMENT '结论部分' ,
+data_source VARCHAR(255) COMMENT '数据源' ,
 PRIMARY KEY (document_id)
-)COMMENT = ''
+) COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
