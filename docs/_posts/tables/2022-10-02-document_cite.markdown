@@ -21,18 +21,11 @@ categories: tables
 
 ## 字段明细
 
-| **#** | **字段**           | **名称**   | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
+| **#** | **字段**           | **名称**   | **数据类型** | **主键** | **索引** | **默认值** | **备注说明** |
 | ----- | ------------------ | --------- | ------------ | -------- | -------- | ---------- | ------------ |
 | 1     | n                  |           | INT          |          |          | 自增       |              |
-| 2     | cited_document_id  | 被引文档id | INT          | √        |          |            |              |
-| 3     | citing_document_id | 施引文档id | INT          | √        |          |            |              |
-
-## 索引
-
-|  #   |        字段        | 索引类型 | 索引方法 | 备注 |
-| :--: | :----------------: | :------: | :------: | :--: |
-|  1   | cited_document_id  |  NORMAL  |  BTREE   |      |
-|  2   | citing_document_id |  NORMAL  |  BTREE   |      |
+| 2     | cited_document_id  | 被引文档id | INT          | √        |  `cited`  |            |              |
+| 3     | citing_document_id | 施引文档id | INT          | √        |  `citing`  |            |              |
 
 ## 分区
 
@@ -42,7 +35,7 @@ categories: tables
 
 ## 代码
 
-### 创建表（含分区）
+### 创建表
 
 ```SQL
 DROP TABLE IF EXISTS document_cite;
@@ -51,20 +44,15 @@ CREATE TABLE document_cite (
     cited_document_id INT    COMMENT '被引文档id' ,
     citing_document_id INT    COMMENT '施引文档id' ,
     PRIMARY KEY (cited_document_id,citing_document_id),
-    KEY(n)
+    KEY(n),
+    INDEX cited(cited_document_id),
+    INDEX citing(citing_document_id)
 )  COMMENT = ''
 PARTITION BY KEY(cited_document_id,citing_document_id)
 PARTITIONS 32;
 ```
 
-### 创建索引
-
-```SQL
-CREATE INDEX cited_document_id ON document_cite(cited_document_id);
-CREATE INDEX citing_document_id ON document_cite(citing_document_id);
-```
-
 ## 更新日志
 
-* 221108：修改主键为引用列，自增列更名为 `n`，增加分区。
+* 221108：修改主键为引用列，自增列更名为 `n`，增加分区。规范化索引。
 * 221002：标准化创建。

@@ -17,14 +17,14 @@ categories: tables
 
 说明：论文作者
 
-更新日期：2022-11-05
+更新日期：2022-11-08
 
 ## 字段明细
 
-| **#** | **字段**                | **名称**     | **数据类型**  | **主键** | **非空** | **默认值** | **备注说明**             |
+| **#** | **字段**                | **名称**     | **数据类型**  | **主键** | **索引** | **默认值** | **备注说明**             |
 | ----- | ----------------------- | ------------ | ------------- | -------- | -------- | ---------- | ------------------------ |
-| 1     | document_id             | id           | INT           |          |          |            |                          |
-| 2     | author_id               | 作者id       | INT           | √        | √        | 自增       |                          |
+| 1     | document_id             | id           | INT           | √        | `id` |            |                          |
+| 2     | author_id               | 作者id       | INT           | √        | `author` | 自增       |                          |
 | 3     | author_display_name     | 展示姓名     | VARCHAR(128)  |          |          |            |                          |
 | 4     | author_rank             | 作者排序     | VARCHAR(8)    |          |          |            |                          |
 | 5     | is_corresponding_author | 是否通讯作者 | VARCHAR(1)    |          |          |            | 1：通讯作者；0：其他作者 |
@@ -38,13 +38,6 @@ categories: tables
 | 13    | author_email            | 作者电邮     | VARCHAR(128)  |          |          |            |                          |
 | 14    | data_source             | 数据源       | VARCHAR(64)  |          |          |            |                          |
 
-## 索引
-
-|  #   |    字段     | 索引类型 | 索引方法 | 备注 |
-| :--: | :---------: | :------: | :------: | :--: |
-|  1   | document_id |  NORMAL  |  BTREE   |      |
-|  2   |  author_id  |  NORMAL  |  BTREE   |      |
-
 ## 分区
 
 分区数量：32
@@ -53,7 +46,7 @@ categories: tables
 
 ## 代码
 
-### 创建表（含分区）
+### 创建表
 
 ```SQL
 DROP TABLE IF EXISTS document_authors;
@@ -72,20 +65,17 @@ CREATE TABLE document_authors(
     author_address TEXT    COMMENT '作者地址' ,
     author_email VARCHAR(128)    COMMENT '作者电邮' ,
     data_source VARCHAR(64)    COMMENT '数据源' ,
-    PRIMARY KEY (author_id)
+    PRIMARY KEY (document_id, author_id),
+    KEY(author_id),
+    INDEX id (document_id),
+    INDEX author (author_id)
 )  COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
 
-### 创建索引
-
-```SQL
-CREATE INDEX document_id ON document_authors(document_id);
-CREATE INDEX author_id ON document_authors(author_id);
-```
-
 ## 更新日志
 
+* 221108：规范化索引。
 * 221105：修改 `author_affiliation_name`、`author_address` 字段数据类型（`VARCHAR` -> `TEXT`）。
 * 221002：标准化创建。

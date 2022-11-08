@@ -17,14 +17,14 @@ categories: tables
 
 说明：文档基础信息
 
-更新日期：2022-11-05
+更新日期：2022-11-08
 
 ## 字段明细
 
-| **#** |       **字段**       |    **名称**    | **数据类型** | **主键** | **非空** | **默认值** |        **备注说明**        |
+| **#** |       **字段**       |    **名称**    | **数据类型** | **主键** | **索引** | **默认值** |        **备注说明**        |
 | :---: | :------------------: | :------------: | :----------: | :------: | :------: | :--------: | :------------------------: |
-|   1   |     document_id      |       id       |     INT      |    √     |    √     |            |                            |
-|   2   |     external_id      |    外部 id     | VARCHAR(32)  |          |          |            |                            |
+|   1   |     document_id      |       id       |     INT      |    √     |  `id`    |            |                            |
+|   2   |     external_id      |    外部 id     | VARCHAR(32)  |          | `eid`    |            |                            |
 |   3   |   external_id_type   |  外部 id 类型  | VARCHAR(32)  |          |          |            |                            |
 |   4   |        title         |    文档标题    | VARCHAR(255) |          |          |            |                            |
 |   5   |   authors_name_str   |  展示作者姓名  | VARCHAR(511) |          |          |            | 规则：多个项目时，`|`分隔 |
@@ -32,24 +32,14 @@ categories: tables
 |   7   |      venue_str       | 展示出版物信息 | VARCHAR(255) |          |          |            |                            |
 |   8   |    abstract_short    |    展示摘要    | VARCHAR(511) |          |          |            |                            |
 |   9   |     keywords_str     |   展示关键词   | VARCHAR(511) |          |          |            | 规则：多个项目时，`|`分隔 |
-|  10   |         doi          |                | VARCHAR(64)  |          |          |            |                            |
+|  10   |         doi          |                | VARCHAR(64)  |          | `doi`    |            |                            |
 |  11   |     publish_date     |    发表时间    | VARCHAR(128) |          |          |            |                            |
-|  12   |     publish_year     |    发表年份    |     INT      |          |          |            |                            |
+|  12   |     publish_year     |    发表年份    |     INT      |          | `py`     |            |                            |
 |  13   |      cite_count      |     被引量     |     INT      |          |          |            |                            |
 |  14   |   creativity_index   |   创新性指数   |    DOUBLE    |          |          |            |                            |
 |  15   | creativity_words_str |   展示创新词   | VARCHAR(255) |          |          |            |                            |
 |  16   |   triples_str_list   |   创新三元组   | VARCHAR(255) |          |          |            |                            |
 |  17   |     data_source      |     数据源     | VARCHAR(64) |          |          |            |                            |
-
-
-
-## 索引
-
-|  #   |    字段     | 索引类型 | 索引方法 | 备注 |
-| :--: | :---------: | :------: | :------: | :--: |
-|  1   | document_id |  UNIQUE  |  BTREE   |      |
-|  2   | external_id |  NORMAL  |  BTREE   |      |
-|  3   |     doi     |  NORMAL  |  BTREE   |      |
 
 ## 分区
 
@@ -59,7 +49,7 @@ categories: tables
 
 ## 代码
 
-### 创建表（含分区）
+### 创建表
 
 ```SQL
 DROP TABLE IF EXISTS documents;
@@ -81,21 +71,18 @@ CREATE TABLE documents(
     creativity_words_str VARCHAR(255)    COMMENT '展示创新词' ,
     triples_str_list VARCHAR(255)    COMMENT '创新三元组' ,
     data_source VARCHAR(64)    COMMENT '数据源' ,
-    PRIMARY KEY (document_id)
+    PRIMARY KEY (document_id),
+    INDEX id (document_id),
+    INDEX eid (external_id),
+    INDEX py (publish_year),
+    INDEX doi (doi)
 )  COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
 
-### 创建索引
-
-```SQL
-CREATE UNIQUE INDEX document_id ON documents(document_id);
-CREATE INDEX external_id ON documents(external_id);
-CREATE INDEX doi ON documents(doi);
-```
-
 ## 更新日志
 
+* 221108：规范化索引。
 * 221106：统一分隔符为 `|`。
 * 221002：标准化创建。

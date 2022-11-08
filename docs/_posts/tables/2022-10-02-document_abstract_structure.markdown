@@ -17,21 +17,17 @@ categories: tables
 
 说明：文档摘要成分（Pubmed 自带信息）
 
-更新日期：2022-11-05
+更新日期：2022-11-08
 
 ## 字段明细
 
-| **#** |  **字段**   | **名称** | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
+| **#** |  **字段**   | **名称** | **数据类型** | **主键** | **索引** | **默认值** | **备注说明** |
 | :---: | :---------: | :------: | :----------: | :------: | :------: | :--------: | :----------: |
-|   1   | document_id |    id    |     INT      |    √     |    √     |            |              |
-|   2   | sentence_id | 内容顺序 |     INT      |    √     |    √     |            |              |
+|   1   | document_id |    id    |     INT      |    √     | `id`  |            |              |
+|   2   | sentence_id | 内容顺序 |     INT      |    √     |        |            |              |
 |   3   |    texts    | 内容全文 |     TEXT     |          |          |            |              |
 |   4   |    label    | 内容类型 | VARCHAR(64)  |          |          |            |              |
 |   5   | data_source |  数据源  | VARCHAR(64) |          |          |            |              |
-
-## 索引
-
-无
 
 ## 分区
 
@@ -41,7 +37,7 @@ categories: tables
 
 ## 代码
 
-### 创建表（含分区）
+### 创建表
 
 ```SQL
 DROP TABLE IF EXISTS document_abstract_structure;
@@ -51,15 +47,15 @@ CREATE TABLE document_abstract_structure(
     texts TEXT    COMMENT '内容全文' ,
     label VARCHAR(64)    COMMENT '内容类型' ,
     data_source VARCHAR(64)    COMMENT '数据源' ,
-    PRIMARY KEY (document_id,sentence_id)
+    PRIMARY KEY (document_id,sentence_id),
+    INDEX id(document_id)
 )  COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
 
-
-
 ## 更新日志
 
+* 221108：规范化索引。
 * 221105：修改 `label` 字段数据类型（`TEXT` -> `VARCHAR(64)`）。
 * 221002：标准化创建。

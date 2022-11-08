@@ -17,17 +17,17 @@ categories: tables
 
 说明：论文出版物
 
-更新日期：2022-10-02
+更新日期：2022-11-08
 
 ## 字段明细
 
-| **#** | **字段**           | **名称**     | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
+| **#** | **字段**           | **名称**     | **数据类型** | **主键** | **索引** | **默认值** | **备注说明** |
 | ----- | ------------------ | ------------ | ------------ | -------- | -------- | ---------- | ------------ |
-| 1     | document_id        |              | INT          |          |          |            |              |
-| 2     | venue_id           |              | INT          | √        | √        | 自增       |              |
+| 1     | document_id        |              | INT          |          | `id`     |            |              |
+| 2     | venue_id           |              | INT          | √        | `venue`  | 自增       |              |
 | 3     | venue_display_name | 出版物展示名 | VARCHAR(511) |          |          |            |              |
 | 4     | venue_name         | 出版物名     | VARCHAR(255) |          |          |            |              |
-| 5     | venue_year         | 出版物年     | VARCHAR(8)   |          |          |            |              |
+| 5     | venue_year         | 出版物年     | VARCHAR(8)   |          | `year` |            |              |
 | 6     | venue_volume       | 出版物卷     | VARCHAR(16)  |          |          |            |              |
 | 7     | venue_issue        | 出版物期     | VARCHAR(16)  |          |          |            |              |
 | 8     | venue_page         | 出版物页     | VARCHAR(64)  |          |          |            |              |
@@ -36,15 +36,7 @@ categories: tables
 | 11    | domain             |              | VARCHAR(128) |          |          |            |              |
 | 12    | field              |              | VARCHAR(128) |          |          |            |              |
 | 13    | subfield           |              | VARCHAR(128) |          |          |            |              |
-| 14    | issn               |              | VARCHAR(16)  |          |          |            |              |
-
-## 索引
-
-|  #   |    字段     | 索引类型 | 索引方法 | 备注 |
-| :--: | :---------: | :------: | :------: | :--: |
-|  1   | document_id |  UNIQUE  |  BTREE   |      |
-|  2   |  venue_id   |  NORMAL  |  BTREE   |      |
-|  3   | venue_year  |  NORMAL  |  BTREE   |      |
+| 14    | issn               |              | VARCHAR(16)  |          | `issn`   |            |              |
 
 ## 分区
 
@@ -54,7 +46,7 @@ categories: tables
 
 ## 代码
 
-### 创建表（含分区）
+### 创建表
 
 ```SQL
 DROP TABLE IF EXISTS document_venues;
@@ -73,20 +65,18 @@ CREATE TABLE document_venues(
     field VARCHAR(128)    COMMENT '' ,
     subfield VARCHAR(128)    COMMENT '' ,
     issn VARCHAR(16)    COMMENT '' ,
-    PRIMARY KEY (venue_id)
+    PRIMARY KEY (document_id, venue_id),
+    KEY (venue_id),
+    INDEX id (document_id),
+    INDEX venue (venue_id),
+    INDEX py (venue_year),
+    INDEX issn (issn)
 )  COMMENT = ''
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
 
-### 创建索引
-
-```SQL
-CREATE INDEX document_id ON document_venues(document_id);
-CREATE INDEX venue_id ON document_venues(venue_id);
-CREATE INDEX venue_year ON document_venues(venue_year);
-```
-
 ## 更新日志
 
+* 221108：规范化索引。
 * 221002：标准化创建。

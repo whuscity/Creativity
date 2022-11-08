@@ -17,26 +17,18 @@ categories: tables
 
 说明：论文医学主题词表
 
-更新日期：2022-11-05
+更新日期：2022-11-08
 
 ## 字段明细
 
-| **#** | **字段**                  | **名称**                | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
+| **#** | **字段**                  | **名称**                | **数据类型** | **主键** | **索引** | **默认值** | **备注说明** |
 | ----- | ------------------------  | ---------------------- | ------------ | -------- | -------- | ---------- | ------------ |
-| 1     | document_id               | 文档 id                | INT          | √        |         |            |              |
-| 2     | descriptor_ui             | MeSH Discriptor UI     | INT          | √        |         |            |              |
+| 1     | document_id               | 文档 id                | INT          | √        |  `id`   |            |              |
+| 2     | descriptor_ui             | MeSH Discriptor UI     | INT          | √        |  `dui`  |            |              |
 | 3     | descriptor_is_major_topic | descriptor 是主要主题   | VARCHAR(1)   |          |          |            |              |
-| 4     | qualifier_ui              | MeSH Qualifier  UI     | INT          | √        |         |            |              |
+| 4     | qualifier_ui              | MeSH Qualifier  UI     | INT          | √        |  `qui`  |            |              |
 | 5     | qualifier_is_major_topic  | qualifier 是主要主题    | VARCHAR(1)   |          |          |            |              |
 | 6     | data_source               | 数据源                  | VARCHAR(64) |          |          |            |              |
-
-## 索引
-
-|  #   |    字段       | 索引类型  | 索引方法 | 备注 |
-| :--: | :-----------: | :------: | :------: | :--: |
-|  1   | document_id   |  NORMAL  |  BTREE   |      |
-|  2   | descriptor_ui |  NORMAL  |  BTREE   |      |
-|  3   | qualifier_ui  |  NORMAL  |  BTREE   |      |
 
 ## 分区
 
@@ -62,21 +54,17 @@ descriptor_is_major_topic VARCHAR(1) COMMENT 'descriptor 是主要主题',
 qualifier_ui INT COMMENT 'MeSH Qualifier UI',
 qualifier_is_major_topic VARCHAR(1) COMMENT 'MajorTopicYN',
 data_source VARCHAR(64) COMMENT '数据源' ,
-PRIMARY KEY (document_id,descriptor_ui,qualifier_ui)
+PRIMARY KEY (document_id,descriptor_ui,qualifier_ui),
+INDEX id (document_id),
+INDEX dui (descriptor_ui),
+INDEX qui (qualifier_ui)
 ) COMMENT = '论文医学主题词表'
 PARTITION BY KEY()
 PARTITIONS 32;
 ```
 
-### 创建索引
-
-```SQL
-CREATE INDEX document_id ON document_mesh(document_id);
-CREATE INDEX descriptor_ui ON document_mesh(descriptor_ui);
-CREATE INDEX qualifier_ui ON document_mesh(qualifier_ui);
-```
-
 ## 更新日志
 
+* 221108：规范化索引。
 * 221105：根据 MeSH 特性重构表，存储预处理后数据，提升性能。
 * [221025](/Creativity/tables/2022/10/25/archive_document_mesh.html)：标准化创建。
