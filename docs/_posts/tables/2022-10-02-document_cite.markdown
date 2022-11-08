@@ -17,15 +17,15 @@ categories: tables
 
 说明：论文引用
 
-更新日期：2022-10-02
+更新日期：2022-11-08
 
 ## 字段明细
 
 | **#** | **字段**           | **名称**   | **数据类型** | **主键** | **非空** | **默认值** | **备注说明** |
-| ----- | ------------------ | ---------- | ------------ | -------- | -------- | ---------- | ------------ |
-| 1     | id                 |            | INT          | √        | √        | 自增       |              |
-| 2     | cited_document_id  | 被引文档id | INT          |          |          |            |              |
-| 3     | citing_document_id | 施引文档id | INT          |          |          |            |              |
+| ----- | ------------------ | --------- | ------------ | -------- | -------- | ---------- | ------------ |
+| 1     | n                  |           | INT          |          |          | 自增       |              |
+| 2     | cited_document_id  | 被引文档id | INT          | √        |          |            |              |
+| 3     | citing_document_id | 施引文档id | INT          | √        |          |            |              |
 
 ## 索引
 
@@ -36,7 +36,9 @@ categories: tables
 
 ## 分区
 
-无
+分区数量：32
+
+分区依据：`KEY(cited_document_id,citing_document_id)`
 
 ## 代码
 
@@ -44,12 +46,15 @@ categories: tables
 
 ```SQL
 DROP TABLE IF EXISTS document_cite;
-CREATE TABLE document_cite(
-    id INT NOT NULL AUTO_INCREMENT  COMMENT '' ,
+CREATE TABLE document_cite (
+    n INT AUTO_INCREMENT  COMMENT '' ,
     cited_document_id INT    COMMENT '被引文档id' ,
     citing_document_id INT    COMMENT '施引文档id' ,
-    PRIMARY KEY (id)
-)  COMMENT = '';
+    PRIMARY KEY (cited_document_id,citing_document_id),
+    KEY(n)
+)  COMMENT = ''
+PARTITION BY KEY(cited_document_id,citing_document_id)
+PARTITIONS 32;
 ```
 
 ### 创建索引
@@ -61,4 +66,5 @@ CREATE INDEX citing_document_id ON document_cite(citing_document_id);
 
 ## 更新日志
 
+* 221108：修改主键为引用列，自增列更名为 `n`，增加分区。
 * 221002：标准化创建。
