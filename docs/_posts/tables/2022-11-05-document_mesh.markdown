@@ -28,7 +28,7 @@ categories: tables
 | 3     | descriptor_is_major_topic | descriptor 是主要主题   | VARCHAR(1)   |          |          |            |              |
 | 4     | qualifier_ui              | MeSH Qualifier  UI     | INT          | √        |         |            |              |
 | 5     | qualifier_is_major_topic  | qualifier 是主要主题    | VARCHAR(1)   |          |          |            |              |
-| 6     | data_source               | 数据源                  | VARCHAR(255) |          |          |            |              |
+| 6     | data_source               | 数据源                  | VARCHAR(64) |          |          |            |              |
 
 ## 索引
 
@@ -61,7 +61,7 @@ descriptor_ui INT COMMENT 'MeSH Discriptor UI',
 descriptor_is_major_topic VARCHAR(1) COMMENT 'descriptor 是主要主题',
 qualifier_ui INT COMMENT 'MeSH Qualifier UI',
 qualifier_is_major_topic VARCHAR(1) COMMENT 'MajorTopicYN',
-data_source VARCHAR(255) COMMENT '数据源' ,
+data_source VARCHAR(64) COMMENT '数据源' ,
 PRIMARY KEY (document_id,descriptor_ui,qualifier_ui)
 ) COMMENT = '论文医学主题词表'
 PARTITION BY KEY()

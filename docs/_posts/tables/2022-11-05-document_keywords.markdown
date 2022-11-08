@@ -28,7 +28,7 @@ categories: tables
 | 3     | keyword_id       | 关键词 id  | VARCHAR(32)  |   √     |          |            | 若源不含 UI，则按本文序列生成，格式 `TYPE_I` |
 | 4     | keyword          | 关键词     | VARCHAR(64) |         |          |            |              |
 | 5     | major_topic_yn   | 是主要主题 | VARCHAR(1)   |         |          |            |              |
-| 6     | data_source      | 数据源     | VARCHAR(255) |         |          |           |               |
+| 6     | data_source      | 数据源     | VARCHAR(64) |         |          |           |               |
 
 ## 索引
 
@@ -56,7 +56,7 @@ keyword_type VARCHAR(32) COMMENT '关键词类型',
 keyword_id VARCHAR(32) COMMENT '关键词 id',
 keyword VARCHAR(64) COMMENT '关键词',
 major_topic_yn VARCHAR(1) COMMENT '是主要主题',
-data_source VARCHAR(255) COMMENT '数据源' ,
+data_source VARCHAR(64) COMMENT '数据源' ,
 PRIMARY KEY (document_id, keyword_type, keyword_id)
 ) COMMENT = ''
 PARTITION BY KEY()

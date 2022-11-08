@@ -30,13 +30,13 @@ categories: tables
 | 5     | is_corresponding_author | 是否通讯作者 | VARCHAR(1)    |          |          |            | 1：通讯作者；0：其他作者 |
 | 6     | is_first_author         | 是否第一作者 | VARCHAR(1)    |          |          |            | 1：第一作者；0：其他作者 |
 | 7     | author_type             | 作者类型     | VARCHAR(8)    |          |          |            |                          |
-| 8     | author_last_name        | 作者姓       | VARCHAR(128)  |          |          |            |                          |
-| 9     | author_fore_name        | 作者名       | VARCHAR(128)  |          |          |            |                          |
+| 8     | author_last_name        | 作者姓       | VARCHAR(64)  |          |          |            |                          |
+| 9     | author_fore_name        | 作者名       | VARCHAR(64)  |          |          |            |                          |
 | 10    | author_initials         | 作者名缩写   | VARCHAR(16)   |          |          |            |                          |
 | 11    | author_affiliation_name | 作者单位     | TEXT  |          |          |            |            |
 | 12    | author_address          | 作者地址     | TEXT |          |          |            |                          |
 | 13    | author_email            | 作者电邮     | VARCHAR(128)  |          |          |            |                          |
-| 14    | data_source             | 数据源       | VARCHAR(255)  |          |          |            |                          |
+| 14    | data_source             | 数据源       | VARCHAR(64)  |          |          |            |                          |
 
 ## 索引
 
@@ -65,13 +65,13 @@ CREATE TABLE document_authors(
     is_corresponding_author VARCHAR(1)    COMMENT '是否通讯作者;1：通讯作者；0：其他作者' ,
     is_first_author VARCHAR(1)    COMMENT '是否第一作者;1：第一作者；0：其他作者' ,
     author_type VARCHAR(8)    COMMENT '作者类型' ,
-    author_last_name VARCHAR(128)    COMMENT '作者姓' ,
-    author_fore_name VARCHAR(128)    COMMENT '作者名' ,
+    author_last_name VARCHAR(64)    COMMENT '作者姓' ,
+    author_fore_name VARCHAR(64)    COMMENT '作者名' ,
     author_initials VARCHAR(16)    COMMENT '作者名缩写' ,
     author_affiliation_name TEXT    COMMENT '作者单位' ,
     author_address TEXT    COMMENT '作者地址' ,
     author_email VARCHAR(128)    COMMENT '作者电邮' ,
-    data_source VARCHAR(255)    COMMENT '数据源' ,
+    data_source VARCHAR(64)    COMMENT '数据源' ,
     PRIMARY KEY (author_id)
 )  COMMENT = ''
 PARTITION BY KEY()

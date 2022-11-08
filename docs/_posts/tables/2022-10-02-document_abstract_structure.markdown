@@ -27,7 +27,7 @@ categories: tables
 |   2   | sentence_id | 内容顺序 |     INT      |    √     |    √     |            |              |
 |   3   |    texts    | 内容全文 |     TEXT     |          |          |            |              |
 |   4   |    label    | 内容类型 | VARCHAR(64)  |          |          |            |              |
-|   5   | data_source |  数据源  | VARCHAR(255) |          |          |            |              |
+|   5   | data_source |  数据源  | VARCHAR(64) |          |          |            |              |
 
 ## 索引
 
@@ -50,7 +50,7 @@ CREATE TABLE document_abstract_structure(
     sentence_id INT NOT NULL   COMMENT '内容顺序' ,
     texts TEXT    COMMENT '内容全文' ,
     label VARCHAR(64)    COMMENT '内容类型' ,
-    data_source VARCHAR(255)    COMMENT '数据源' ,
+    data_source VARCHAR(64)    COMMENT '数据源' ,
     PRIMARY KEY (document_id,sentence_id)
 )  COMMENT = ''
 PARTITION BY KEY()

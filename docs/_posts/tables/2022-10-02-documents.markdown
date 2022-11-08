@@ -39,7 +39,7 @@ categories: tables
 |  14   |   creativity_index   |   创新性指数   |    DOUBLE    |          |          |            |                            |
 |  15   | creativity_words_str |   展示创新词   | VARCHAR(255) |          |          |            |                            |
 |  16   |   triples_str_list   |   创新三元组   | VARCHAR(255) |          |          |            |                            |
-|  17   |     data_source      |     数据源     | VARCHAR(255) |          |          |            |                            |
+|  17   |     data_source      |     数据源     | VARCHAR(64) |          |          |            |                            |
 
 
 
@@ -74,13 +74,13 @@ CREATE TABLE documents(
     abstract_short VARCHAR(511)    COMMENT '展示摘要' ,
     keywords_str VARCHAR(511)    COMMENT '展示关键词;规则：多个项目时，分号分隔' ,
     doi VARCHAR(64)    COMMENT '' ,
-    publish_date VARCHAR(128)    COMMENT '发表时间' ,
+    publish_date VARCHAR(32)    COMMENT '发表时间' ,
     publish_year INT    COMMENT '发表年份' ,
     cite_count INT    COMMENT '被引量' ,
     creativity_index DOUBLE    COMMENT '创新性指数' ,
     creativity_words_str VARCHAR(255)    COMMENT '展示创新词' ,
     triples_str_list VARCHAR(255)    COMMENT '创新三元组' ,
-    data_source VARCHAR(255)    COMMENT '数据源' ,
+    data_source VARCHAR(64)    COMMENT '数据源' ,
     PRIMARY KEY (document_id)
 )  COMMENT = ''
 PARTITION BY KEY()

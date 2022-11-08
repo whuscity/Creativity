@@ -29,7 +29,7 @@ categories: tables
 |   4   |  abstract_objective  | 目标部分 |     TEXT     |          |          |            |              |
 |   5   |   abstract_results   | 结果部分 |     TEXT     |          |          |            |              |
 |   6   | abstract_conclusions | 结论部分 |     TEXT     |          |          |            |              |
-|   7   |     data_source      |  数据源  | VARCHAR(255) |          |          |            |              |
+|   7   |     data_source      |  数据源  | VARCHAR(64) |          |          |            |              |
 
 ## 索引
 
@@ -54,7 +54,7 @@ abstract_background TEXT COMMENT '背景部分' ,
 abstract_objective TEXT COMMENT '目标部分' ,
 abstract_results TEXT COMMENT '结果部分' ,
 abstract_conclusions TEXT COMMENT '结论部分' ,
-data_source VARCHAR(255) COMMENT '数据源' ,
+data_source VARCHAR(64) COMMENT '数据源' ,
 PRIMARY KEY (document_id)
 ) COMMENT = ''
 PARTITION BY KEY()

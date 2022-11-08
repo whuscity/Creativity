@@ -32,10 +32,10 @@ categories: tables
 | 7     | venue_issue        | 出版物期     | VARCHAR(16)  |          |          |            |              |
 | 8     | venue_page         | 出版物页     | VARCHAR(64)  |          |          |            |              |
 | 9     | venue_type         | 出版物类型   | VARCHAR(255)  |          |          |            |              |
-| 10    | data_source        | 数据源       | VARCHAR(255) |          |          |            |              |
-| 11    | domain             |              | VARCHAR(255) |          |          |            |              |
-| 12    | field              |              | VARCHAR(255) |          |          |            |              |
-| 13    | subfield           |              | VARCHAR(255) |          |          |            |              |
+| 10    | data_source        | 数据源       | VARCHAR(64) |          |          |            |              |
+| 11    | domain             |              | VARCHAR(128) |          |          |            |              |
+| 12    | field              |              | VARCHAR(128) |          |          |            |              |
+| 13    | subfield           |              | VARCHAR(128) |          |          |            |              |
 | 14    | issn               |              | VARCHAR(16)  |          |          |            |              |
 
 ## 索引
@@ -68,10 +68,10 @@ CREATE TABLE document_venues(
     venue_issue VARCHAR(16)    COMMENT '出版物期' ,
     venue_page VARCHAR(16)    COMMENT '出版物页' ,
     venue_type VARCHAR(32)    COMMENT '出版物类型' ,
-    data_source VARCHAR(255)    COMMENT '数据源' ,
-    domain VARCHAR(255)    COMMENT '' ,
-    field VARCHAR(255)    COMMENT '' ,
-    subfield VARCHAR(255)    COMMENT '' ,
+    data_source VARCHAR(64)    COMMENT '数据源' ,
+    domain VARCHAR(128)    COMMENT '' ,
+    field VARCHAR(128)    COMMENT '' ,
+    subfield VARCHAR(128)    COMMENT '' ,
     issn VARCHAR(16)    COMMENT '' ,
     PRIMARY KEY (venue_id)
 )  COMMENT = ''
