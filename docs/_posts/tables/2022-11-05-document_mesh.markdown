@@ -17,7 +17,7 @@ categories: tables
 
 说明：论文医学主题词表
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -32,9 +32,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+无
 
 ## 其他说明
 
@@ -58,13 +56,12 @@ PRIMARY KEY (document_id,descriptor_ui,qualifier_ui),
 INDEX id (document_id),
 INDEX dui (descriptor_ui),
 INDEX qui (qualifier_ui)
-) COMMENT = '论文医学主题词表'
-PARTITION BY KEY()
-PARTITIONS 32;
+) COMMENT = '论文医学主题词表';
 ```
 
 ## 更新日志
 
+* 221109：删除分区。
 * 221108：规范化索引。
 * 221105：根据 MeSH 特性重构表，存储预处理后数据，提升性能。
 * [221025](/Creativity/tables/2022/10/25/archive_document_mesh.html)：标准化创建。

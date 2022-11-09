@@ -17,7 +17,7 @@ categories: tables
 
 说明：论文出版物
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -40,9 +40,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+无
 
 ## 代码
 
@@ -71,12 +69,11 @@ CREATE TABLE document_venues(
     INDEX venue (venue_id),
     INDEX py (venue_year),
     INDEX issn (issn)
-)  COMMENT = ''
-PARTITION BY KEY()
-PARTITIONS 32;
+)  COMMENT = '';
 ```
 
 ## 更新日志
 
+* 221109：删除分区。
 * 221108：规范化索引。
 * 221002：标准化创建。

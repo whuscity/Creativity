@@ -17,7 +17,7 @@ categories: tables
 
 说明：论文引用
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -29,9 +29,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY(cited_document_id,citing_document_id)`
+无
 
 ## 代码
 
@@ -47,12 +45,11 @@ CREATE TABLE document_cite (
     KEY(n),
     INDEX cited(cited_document_id),
     INDEX citing(citing_document_id)
-)  COMMENT = ''
-PARTITION BY KEY(cited_document_id,citing_document_id)
-PARTITIONS 32;
+)  COMMENT = '';
 ```
 
 ## 更新日志
 
+* 221109：调整分区。
 * 221108：修改主键为引用列，自增列更名为 `n`，增加分区。规范化索引。
 * 221002：标准化创建。

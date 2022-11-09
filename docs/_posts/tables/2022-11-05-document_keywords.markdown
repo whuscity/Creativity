@@ -17,7 +17,7 @@ categories: tables
 
 说明：论文关键词
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -32,9 +32,11 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+依据列 `keyword_type` 分区存储，查询时建议使用 `keyword_type` 进行限定。分区分别为：
+1. `meshheading` （`keyword_type` 为 MeshHeading）
+2. `chemical` （`keyword_type` 为 Chemical）
+3. `keyword` （`keyword_type` 为 Keyword）
+4. `xrr` （`keyword_type` 为空）
 
 ## 代码
 
@@ -53,12 +55,18 @@ PRIMARY KEY (document_id, keyword_type, keyword_id),
 INDEX id (document_id),
 INDEX keyword (keyword_id)
 ) COMMENT = ''
-PARTITION BY KEY()
-PARTITIONS 32;
+PARTITION BY LIST COLUMNS(keyword_type)
+(
+    PARTITION meshheading VALUES in ('MeshHeading'),
+    PARTITION chemical VALUES in ('Chemical'),
+    PARTITION keyword VALUES in ('Keyword'),
+    PARTITION xrr VALUES IN ('',NULL)
+);
 ```
 
 ## 更新日志
 
+* 221109：调整分区，仅保留 `keyword_type`。
 * 221108：规范化索引。
 * 221105：考虑多源（Mesh、Chemical、Keyword、Pubtator）词特性，统一重构表。
 * [221002](/Creativity/tables/2022/10/02/archive_document_keywords.html)：标准化创建。

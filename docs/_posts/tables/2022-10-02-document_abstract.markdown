@@ -17,7 +17,7 @@ categories: tables
 
 说明：文档结构化摘要
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -33,9 +33,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+无
 
 ## 代码
 
@@ -53,12 +51,11 @@ abstract_conclusions TEXT COMMENT '结论部分' ,
 data_source VARCHAR(64) COMMENT '数据源' ,
 PRIMARY KEY (document_id),
 INDEX id (document_id)
-) COMMENT = ''
-PARTITION BY KEY()
-PARTITIONS 32;
+) COMMENT = '';
 ```
 
 ## 更新日志
 
+* 221109：删除分区。
 * 221108：规范化索引。
 * 221002：标准化创建。

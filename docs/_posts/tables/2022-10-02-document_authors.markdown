@@ -17,7 +17,7 @@ categories: tables
 
 说明：论文作者
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -40,9 +40,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+无
 
 ## 代码
 
@@ -69,13 +67,12 @@ CREATE TABLE document_authors(
     KEY(author_id),
     INDEX id (document_id),
     INDEX author (author_id)
-)  COMMENT = ''
-PARTITION BY KEY()
-PARTITIONS 32;
+)  COMMENT = '';
 ```
 
 ## 更新日志
 
+* 221109：删除分区。
 * 221108：规范化索引。
 * 221105：修改 `author_affiliation_name`、`author_address` 字段数据类型（`VARCHAR` -> `TEXT`）。
 * 221002：标准化创建。

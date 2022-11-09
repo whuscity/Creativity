@@ -17,7 +17,7 @@ categories: tables
 
 说明：文档摘要成分（Pubmed 自带信息）
 
-更新日期：2022-11-08
+更新日期：2022-11-09
 
 ## 字段明细
 
@@ -31,9 +31,7 @@ categories: tables
 
 ## 分区
 
-分区数量：32
-
-分区依据：`KEY()`
+无
 
 ## 代码
 
@@ -49,13 +47,12 @@ CREATE TABLE document_abstract_structure(
     data_source VARCHAR(64)    COMMENT '数据源' ,
     PRIMARY KEY (document_id,sentence_id),
     INDEX id(document_id)
-)  COMMENT = ''
-PARTITION BY KEY()
-PARTITIONS 32;
+)  COMMENT = '';
 ```
 
 ## 更新日志
 
+* 221109：删除分区。
 * 221108：规范化索引。
 * 221105：修改 `label` 字段数据类型（`TEXT` -> `VARCHAR(64)`）。
 * 221002：标准化创建。
