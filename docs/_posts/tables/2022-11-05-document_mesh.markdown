@@ -44,8 +44,8 @@ categories: tables
 ### 创建表（含分区）
 
 ```SQL
-DROP TABLE IF EXISTS document_keywords;
-CREATE TABLE document_keywords(
+DROP TABLE IF EXISTS document_mesh;
+CREATE TABLE document_mesh(
 document_id INT COMMENT '文档 id' ,
 descriptor_ui INT COMMENT 'MeSH Discriptor UI',
 descriptor_is_major_topic VARCHAR(1) COMMENT 'descriptor 是主要主题',
