@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import json
 
-dbconfig = json.load(open('./dbconfig.json'))
+dbconfig = json.load(open('./db.config'))
 
 local_obj = threading.local()
 
